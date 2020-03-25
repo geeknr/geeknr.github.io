@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 极客笔记</title>
+    <link>https://geeknr.com/categories/</link>
+    <description>Recent content in Categories on 极客笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#39;http://www.beian.gov.cn/portal/registerSystemInfo?spm=5176.13841030.7y9jhqsfz.111.3b715c69yrvLX2&#39; target=&#39;_blank&#39;&gt;粤ICP备19141391号-1&lt;/a&gt;</copyright>
+    
+	<atom:link href="https://geeknr.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
