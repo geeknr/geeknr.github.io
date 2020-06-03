@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.66.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="何海涛的博客">
+<meta name="keywords" content="tech">
+<meta name="description" content="imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。">
+
+
+<meta property="og:description" content="imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链之发行以太坊资产">
+<meta name="twitter:title" content="区块链之发行以太坊资产">
+<meta property="og:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+<meta property="twitter:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+<meta property="og:site_name" content="何海涛的博客">
+<meta property="og:description" content="imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。">
+<meta name="twitter:description" content="imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-03T14:08:33">
+  
+  
+    <meta property="article:modified_time" content="2020-06-03T14:08:33">
+  
+  
+  
+    
+      <meta property="article:section" content="区块链">
+    
+  
+  
+    
+      <meta property="article:tag" content="tag1">
+    
+      <meta property="article:tag" content="tag2">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@adityamangal410">
+
+
+  <meta name="twitter:creator" content="@adityamangal410">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://hehaitao.vip/profile.jpg">
+  <meta property="twitter:image" content="https://hehaitao.vip/profile.jpg">
+
+
+    <title>区块链之发行以太坊资产</title>
+
+    <link rel="icon" href="https://hehaitao.vip/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://hehaitao.vip/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-78062737-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://hehaitao.vip/">何海涛的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://hehaitao.vip/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://hehaitao.vip/#about">
+          <img class="sidebar-profile-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">何海涛的博客</h4>
+        
+          <h5 class="sidebar-profile-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/adityamangal410/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:adityamangal410@yahoo.co.in" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      区块链之发行以太坊资产
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-03T14:08:33&#43;08:00">
+        
+  六月 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/%e5%8c%ba%e5%9d%97%e9%93%be">区块链</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。</p>
+<h2 id="1安装-imtoken-创建属于自己的钱包账户">1、安装 imToken 创建属于自己的钱包账户</h2>
+<p>首先打开 <a href="https://token.im/">https://token.im/</a> 官网，谨记必须下载这里的，避免下载有病毒或者上寨的APP而导致个人经济损失。</p>
+<p>也可以使用百度云链接：https://pan.baidu.com/s/1LugzbuYIxmxseImNDzG5mg 提取码：qsd7</p>
+<p><img src="https://images.gitbook.cn/a02cde80-06af-11ea-aa0d-47ff9b96a56e" alt="在这里插入图片描述">苹果版必须由应用市场下载，android版本可以去Google play或者下载apk直接安装。</p>
+<h3 id="如何创建钱包">如何创建钱包？</h3>
+<p>在 imToken 内点击「我」选择「管理钱包」，点击钱包管理界面右上角“+”按钮，选择对应的公链，点击创建。</p>
+<p>创建步骤:</p>
+<ol>
+<li>输入钱包名称、钱包交易密码、密码提示信息</li>
+<li>根据提示保存钱包助记词</li>
+<li>助记词二次验证后钱包创建成功（助记词代表了资产控制权，请务必妥善保管）</li>
+</ol>
+<p>创建钱包后务必做好钱包备份，以免出现未备份钱包导致资产损失的情况。</p>
+<h3 id="如何备份数字身份">如何备份数字身份？</h3>
+<p>在 imToken 2.0 中, 我们引入了数字身份的概念, 关于什么是数字身份, 可以点击这里查看详细解释。那么我们该如何备份钱包/身份呢?</p>
+<p>1、点击 &ldquo;我&rdquo; -&gt; 再点击顶部的头像按钮, 进入我的身份界面</p>
+<p><img src="https://images.gitbook.cn/64fa7670-06b3-11ea-977e-f7384b946e4d" alt="在这里插入图片描述">2、点击 &ldquo;备份身份&rdquo; , 输入创建身份时的密码<img src="https://images.gitbook.cn/812b1b60-06b3-11ea-9463-937ab8842d6e" alt="在这里插入图片描述">3、开始备份身份, 请按照顺序抄写助记词, 关于如何安全备份助记词, 可以点击这里查看详细讲解<img src="https://images.gitbook.cn/91911ae0-06b3-11ea-914f-ffea6e28e180" alt="在这里插入图片描述"><strong>PS：</strong> 当你创建数字身份的时候, 该数字身份会对应多个钱包, 包括比特币钱包, 以太坊钱包和你创建的 EOS 钱包, 你备份的身份, 也是这些钱包所对应的助记词。而你后续导入到 imToken 的以太坊钱包、比特币钱包或者是 EOS 钱包, 都不是该身份下助记词所对应的钱包。</p>
+<h3 id="如何导入钱包">如何导入钱包?</h3>
+<p>imToken 2.0 引入了数字身份的概念, 数字身份并不是实名认证的身份, 而是你在区块链世界中的数字身份。关于数字身份的概念可以点击这里查看详情</p>
+<p>imToken 2.0 身份钱包可以通过创建身份 / 恢复身份两种方式导入。用户有了数字身份钱包，才能导入其它钱包。</p>
+<p>那么在当前数字身份下, 如何导入钱包呢?
+1.打开 imToken 后选择右下角「我」，</p>
+<p>2.点击「钱包管理」进入钱包管理界面。</p>
+<p>3.点击右上角的“+”进入添加钱包界面，</p>
+<p>4.选择钱包类型，「导入」<img src="https://images.gitbook.cn/10e95060-06b3-11ea-9a4d-e7bab261552c" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="2学习编写安全可靠智能合约发币代码">2、学习编写安全可靠智能合约发币代码</h2>
+<p>合约代码尽量选择最新且无安全漏洞的合约代码 ，并请安全团队认证。</p>
+<p>具体参考代码如下：</p>
+<pre><code>pragma solidity ^0.4.25;
+
+/**
+ * @title SafeMath
+ * @dev Math operations with safety checks that throw on error
+ */
+library SafeMath {
+
+  /**
+  * @dev Multiplies two numbers, throws on overflow.
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    if (a == 0) {
+      return 0;
+    }
+    c = a * b;
+    assert(c / a == b);
+    return c;
+  }
+
+  /**
+  * @dev Integer division of two numbers, truncating the quotient.
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+    // uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return a / b;
+  }
+
+  /**
+  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b &lt;= a);
+    return a - b;
+  }
+
+  /**
+  * @dev Adds two numbers, throws on overflow.
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    c = a + b;
+    assert(c &gt;= a);
+    return c;
+  }
+}
+
+/**
+ * @title Ownable
+ * @dev The Ownable contract has an owner address, and provides basic authorization control
+ * functions, this simplifies the implementation of &quot;user permissions&quot;.
+ */
+contract Ownable {
+  address public owner;
+
+
+  event OwnershipRenounced(address indexed previousOwner);
+  event OwnershipTransferred(
+    address indexed previousOwner,
+    address indexed newOwner
+  );
+
+
+  /**
+   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+   * account.
+   */
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(msg.sender == owner);
+    _;
+  }
+
+  /**
+   * @dev Allows the current owner to transfer control of the contract to a newOwner.
+   * @param newOwner The address to transfer ownership to.
+   */
+  function transferOwnership(address newOwner) public onlyOwner {
+    require(newOwner != address(0));
+    emit OwnershipTransferred(owner, newOwner);
+    owner = newOwner;
+  }
+
+  /**
+   * @dev Allows the current owner to relinquish control of the contract.
+   */
+  function renounceOwnership() public onlyOwner {
+    emit OwnershipRenounced(owner);
+    owner = address(0);
+  }
+}
+
+
+
+/**
+ * @title Pausable
+ * @dev Base contract which allows children to implement an emergency stop mechanism.
+ */
+contract Pausable is Ownable {
+  event Pause();
+  event Unpause();
+
+  bool public paused = false;
+
+
+  /**
+   * @dev Modifier to make a function callable only when the contract is not paused.
+   */
+  modifier whenNotPaused() {
+    require(!paused);
+    _;
+  }
+
+  /**
+   * @dev Modifier to make a function callable only when the contract is paused.
+   */
+  modifier whenPaused() {
+    require(paused);
+    _;
+  }
+
+  /**
+   * @dev called by the owner to pause, triggers stopped state
+   */
+  function pause() onlyOwner whenNotPaused public {
+    paused = true;
+    emit Pause();
+  }
+
+  /**
+   * @dev called by the owner to unpause, returns to normal state
+   */
+  function unpause() onlyOwner whenPaused public {
+    paused = false;
+    emit Unpause();
+  }
+}
+
+
+/**
+ * @title ERC20Basic
+ * @dev Simpler version of ERC20 interface
+ * @dev see https://github.com/ethereum/EIPs/issues/179
+ */
+contract ERC20Basic {
+  function totalSupply() public view returns (uint256);
+  function balanceOf(address who) public view returns (uint256);
+  function transfer(address to, uint256 value) public returns (bool);
+  event Transfer(address indexed from, address indexed to, uint256 value);
+}
+
+
+/**
+ * @title ERC20 interface
+ * @dev see https://github.com/ethereum/EIPs/issues/20
+ */
+contract ERC20 is ERC20Basic {
+  function allowance(address owner, address spender)
+    public view returns (uint256);
+
+  function transferFrom(address from, address to, uint256 value)
+    public returns (bool);
+
+  function approve(address spender, uint256 value) public returns (bool);
+  event Approval(
+    address indexed owner,
+    address indexed spender,
+    uint256 value
+  );
+}
+
+/**
+ * @title Basic token
+ * @dev Basic version of StandardToken, with no allowances.
+ */
+contract BasicToken is ERC20Basic {
+  using SafeMath for uint256;
+
+  mapping(address =&gt; uint256) balances;
+
+  uint256 totalSupply_;
+
+  /**
+  * @dev total number of tokens in existence
+  */
+  function totalSupply() public view returns (uint256) {
+    return totalSupply_;
+  }
+
+  /**
+  * @dev transfer token for a specified address
+  * @param _to The address to transfer to.
+  * @param _value The amount to be transferred.
+  */
+  function transfer(address _to, uint256 _value) public returns (bool) {
+    require(_to != address(0));
+    require(_value &lt;= balances[msg.sender]);
+
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(msg.sender, _to, _value);
+    return true;
+  }
+
+  /**
+  * @dev Gets the balance of the specified address.
+  * @param _owner The address to query the the balance of.
+  * @return An uint256 representing the amount owned by the passed address.
+  */
+  function balanceOf(address _owner) public view returns (uint256) {
+    return balances[_owner];
+  }
+
+}
+
+
+/**
+ * @title Standard ERC20 token
+ *
+ * @dev Implementation of the basic standard token.
+ * @dev https://github.com/ethereum/EIPs/issues/20
+ * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
+ */
+contract StandardToken is ERC20, BasicToken {
+
+  mapping (address =&gt; mapping (address =&gt; uint256)) internal allowed;
+
+
+  /**
+   * @dev Transfer tokens from one address to another
+   * @param _from address The address which you want to send tokens from
+   * @param _to address The address which you want to transfer to
+   * @param _value uint256 the amount of tokens to be transferred
+   */
+  function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+  )
+    public
+    returns (bool)
+  {
+    require(_to != address(0));
+    require(_value &lt;= balances[_from]);
+    require(_value &lt;= allowed[_from][msg.sender]);
+
+    balances[_from] = balances[_from].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+    emit Transfer(_from, _to, _value);
+    return true;
+  }
+
+  /**
+   * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
+   *
+   * Beware that changing an allowance with this method brings the risk that someone may use both the old
+   * and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this
+   * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
+   * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+   * @param _spender The address which will spend the funds.
+   * @param _value The amount of tokens to be spent.
+   */
+  function approve(address _spender, uint256 _value) public returns (bool) {
+    allowed[msg.sender][_spender] = _value;
+    emit Approval(msg.sender, _spender, _value);
+    return true;
+  }
+
+  /**
+   * @dev Function to check the amount of tokens that an owner allowed to a spender.
+   * @param _owner address The address which owns the funds.
+   * @param _spender address The address which will spend the funds.
+   * @return A uint256 specifying the amount of tokens still available for the spender.
+   */
+  function allowance(
+    address _owner,
+    address _spender
+   )
+    public
+    view
+    returns (uint256)
+  {
+    return allowed[_owner][_spender];
+  }
+
+}
+
+
+/**
+ * @title Pausable token
+ * @dev StandardToken modified with pausable transfers.
+ **/
+contract PausableToken is StandardToken, Pausable {
+
+  function transfer(
+    address _to,
+    uint256 _value
+  )
+    public
+    whenNotPaused
+    returns (bool)
+  {
+    return super.transfer(_to, _value);
+  }
+
+  function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+  )
+    public
+    whenNotPaused
+    returns (bool)
+  {
+    return super.transferFrom(_from, _to, _value);
+  }
+
+  function approve(
+    address _spender,
+    uint256 _value
+  )
+    public
+    whenNotPaused
+    returns (bool)
+  {
+    return super.approve(_spender, _value);
+  }
+}
+
+contract Bitfine is PausableToken {
+    string public name = &quot;bitfine&quot;;
+    string public symbol = &quot;BFC&quot;;
+    uint public decimals = 18;
+    uint public INITIAL_SUPPLY = 210000000 * 10**uint(decimals);
+
+    constructor() public {
+        totalSupply_ = INITIAL_SUPPLY;
+        balances[msg.sender] = INITIAL_SUPPLY;
+    }
+}
+</code></pre><p><strong>1、函数说明</strong></p>
+<p><strong>totalSupply</strong> 代表的是代币发行总量 totalSupply():该方法可以返回代币的总数量</p>
+<p><strong>balanceOf()</strong> 该方法返回的是输入钱包地址后，该钱包的代币余额</p>
+<p><strong>tansferFrom()</strong> 从一个地址向另一个地址发送余额</p>
+<p><strong>approve()</strong> 允许<em>spender从你的账户转出</em>value余额</p>
+<p><strong>allowance()</strong> 允许<em>spender从你的账户转出</em>value的余额，调用多次会覆盖可用量。</p>
+<p><strong>event transfer()</strong> token转移完成后出发</p>
+<p><strong>event approval()</strong> approve(address _spender, uint256 _value)调用后触发</p>
+<p><strong>2、安全运算</strong></p>
+<p>在合约金额运算的时候必须使用安全函数进行操作，否则会造成严重的合约漏洞导致代币无限增发的风险，切勿轻视此问题。</p>
+<pre><code>/**
+  * 乘法  a * b
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    if (a == 0) {
+      return 0;
+    }
+    c = a * b;
+    assert(c / a == b);
+    return c;
+  }
+
+  /**
+  * 除法 a / b
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+    // uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return a / b;
+  }
+
+  /**
+  * 减法 a - b
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b &lt;= a);
+    return a - b;
+  }
+
+  /**
+  * 加法 a + b
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    c = a + b;
+    assert(c &gt;= a);
+    return c;
+  }
+</code></pre><p><strong>3、参数讲解</strong></p>
+<p>这里我们重点讲解下name, symbol, decimal 三个参数的含义</p>
+<ul>
+<li>name 指的是代币全称，你可以使用一个几个单词描述</li>
+<li>symbol 指的是代币简称，比如bitcoin简写BTC</li>
+<li>decimal 指的是代币小数位，比如以太坊小数位18位，usdt小数位6位</li>
+</ul>
+<pre><code>contract Bitfine is PausableToken {
+    string public name = &quot;bitfine&quot;;
+    string public symbol = &quot;BFC&quot;;
+    uint public decimals = 18;
+    uint public INITIAL_SUPPLY = 210000000 * 10**uint(decimals);
+
+    constructor() public {
+        totalSupply_ = INITIAL_SUPPLY;
+        balances[msg.sender] = INITIAL_SUPPLY;
+    }
+}
+</code></pre><p><strong>以上仅作为实例，具体真实情况可更加需求来定。</strong></p>
+<hr>
+<h2 id="3下载安装-metamask-以太坊钱包插件">3、下载安装 MetaMask 以太坊钱包插件</h2>
+<p><strong>准备工作</strong></p>
+<p>1.下载安装Google浏览器：</p>
+<ul>
+<li>官网下载：https://www.google.cn/intl/zh-CN/chrome/</li>
+<li>百度云链接：https://pan.baidu.com/s/1G8bRwRxuoyKfJ441yuEZjA 提取码：zsaq</li>
+</ul>
+<p>2.使用网络服务下载插件：</p>
+<ul>
+<li>官网下载： <a href="https://github.com/getlantern/download">https://github.com/getlantern/download</a></li>
+<li>百度云链接：https://pan.baidu.com/s/1SrDWmYvXI-kHDliyD9Ho1w 提取码：0tim</li>
+</ul>
+<p><strong>操作流程</strong></p>
+<ol>
+<li>打开浏览器和网络程序</li>
+<li>点击左上角 <strong>应用</strong> -》 <strong>Chrome网上应用店</strong> -》搜索框输入：<strong>MetaMask</strong> 然后 <strong>添加至Chrome</strong></li>
+</ol>
+<p>操作如图所示：<img src="https://images.gitbook.cn/8cff1150-0f53-11ea-b8b0-e72fcf047dd1" alt="在这里插入图片描述"></p>
+<p><strong>创建账号</strong></p>
+<p>1、点击浏览器地址栏右侧，MetaMask的狐狸头图标</p>
+<p><img src="https://images.gitbook.cn/eed25420-0f60-11ea-9048-35669df1ccc8#pic_center" alt="在这里插入图片描述">2、点击Accept按钮，显示的是MetaMask的服务条款<img src="https://images.gitbook.cn/ff9e4160-0f60-11ea-8507-2b0d66762c10" alt="在这里插入图片描述"></p>
+<p>3、接下来有两个选择：可以导入以前的账号，也可以创建新账号。<img src="https://images.gitbook.cn/201828c0-0f61-11ea-ab9a-d3628864cc26" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>只要英文助记词正确，密码可以重新设置，仍然能找回之前的ETH钱包地址。 密码重置后，下次登录就可以用新密码了。 测试专用助记词： loan wasp endless couch melt develop cabbage sock deny tackle fringe history 看看ETH钱包地址是否为： 0xD134dd2a3c16Fb12885cd6FDc8a03D4bbe5d7031</p>
+</blockquote>
+<p>创建新账号：输入一串8位的密码，再次重复输入，点击CREATE按钮，即可完成。 下面以创建新账号为例：</p>
+<p><img src="https://images.gitbook.cn/72044bf0-0f61-11ea-aca6-656503cb1e9f" alt="在这里插入图片描述"></p>
+<p>在点击CREATE按钮后，MetaMask会为用户创建12个英文助记词，一定要保存好这些助记词，点击SAVE SEED WORDS AS FILE可以将助词词以文件的形式保存到本地，建议使用纸笔手工记录并收藏于安全的地方。</p>
+<p><img src="https://images.gitbook.cn/82d36d80-0f61-11ea-a85e-aff85082c29a" alt="在这里插入图片描述"></p>
+<p>至此，就可以看到我们的账号界面了</p>
+<p><img src="https://images.gitbook.cn/8c483c10-0f61-11ea-9760-63850cdf5020" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="4使用-remix-solidity-ide-编译部署合约">4、使用 Remix Solidity IDE 编译部署合约</h2>
+<p>打开 Remix Solidity IDE 访问地址： <a href="https://remix.ethereum.org/">https://remix.ethereum.org/</a></p>
+<p>1、编写合约</p>
+<p>首先点击<strong>Solidity</strong>按钮，进入合约代码编辑器。新建一个名称为<strong>TokenERC20.sol</strong>的文件。将 “<strong>2、学习编写安全可靠智能合约发币代码</strong>” 的合约代码复制到编辑器当中。</p>
+<p><img src="https://images.gitbook.cn/e2537380-0f58-11ea-a126-e95cedfa35c4" alt="在这里插入图片描述">2、编译合约</p>
+<p>编译合约需要选择代码需要对应的编辑器版本，可根据具体情况而定。这里我选择的是<strong>0.4.25+</strong> 语言为<strong>Solidity</strong>，然后定击**Complie TokenERC20.sol **按钮。顶部有控制台输出信息，然后没有红色错位则成功编译好了。</p>
+<p><img src="https://images.gitbook.cn/b63e0d00-0f58-11ea-aed1-f1ef5103c1de" alt="在这里插入图片描述">3、部署合约</p>
+<p>打开左侧 <strong>部署</strong> 选项卡，页面如下：<img src="https://images.gitbook.cn/9a8031a0-0f59-11ea-b8b0-e72fcf047dd1" alt="在这里插入图片描述"><strong>Environment</strong> 必须选择为<strong>Injected Web3</strong>选项。然后会弹出如图所示的：</p>
+<p><img src="https://images.gitbook.cn/534e1920-0f57-11ea-bc5b-8fcb37e306cb" alt="在这里插入图片描述"></p>
+<p>这里我们输入之前设置的密码，然后登录进去关键账户</p>
+<p><img src="https://images.gitbook.cn/a9acffc0-0f57-11ea-ba67-2d006278ed6b" alt="在这里插入图片描述"></p>
+<p>然后Remix就跟MetaMask里面的以太坊账户关联起来。</p>
+<p><strong>Account</strong> 选项 里面会自动填入关联账户的以太坊地址，说明是这个以太坊地址在创建合约。然后产生的资产也为账户所有。同时也必须保证账户地址里面有足额的发行资产的手续费来完成交易，否则会提示失败！</p>
+<p><strong>Gas limit</strong> 选项为创建合约需要花费手续费。这里可以根据实际情况修改，</p>
+<p>调起MetaMask插件进行以太坊手续费支付确认</p>
+<p><img src="https://images.gitbook.cn/7258ce30-0f59-11ea-8df7-f3d8d2ddf906" alt="在这里插入图片描述"></p>
+<p>等待合约上链部署确认请求</p>
+<p><img src="https://images.gitbook.cn/d3636040-0f5a-11ea-a3a0-91aedf08c897" alt="在这里插入图片描述"></p>
+<p>新发布的token需要添加代币才能进行操作使用</p>
+<p><img src="https://images.gitbook.cn/6377b9a0-0f5c-11ea-8177-b393854d56fa" alt="在这里插入图片描述"></p>
+<p>在代币联系人地址填入：<strong>合约地址</strong> 就可以自动把改资产添加到自己的账户列表下面了。</p>
+<h2 id="在这里插入图片描述httpsimagesgitbookcn76425d10-0f5c-11ea-955b-1d7a5d13bb48"><img src="https://images.gitbook.cn/76425d10-0f5c-11ea-955b-1d7a5d13bb48" alt="在这里插入图片描述"></h2>
+<h2 id="5如何免费获取以太坊支付手续费">5、如何免费获取以太坊支付手续费</h2>
+<p><strong>1、直接在rinkeby测试网申请</strong></p>
+<p>使用rinkeby测试网申请测试代币，打开地址：https://www.rinkeby.io/#faucet</p>
+<p>图1：</p>
+<p><img src="https://images.gitbook.cn/595be030-0f5d-11ea-ab9a-d3628864cc26" alt="在这里插入图片描述"></p>
+<p>首先要注册一个google账号，打开google+，发布一条带有以太坊账户地址的说说</p>
+<p>图2：</p>
+<p><img src="https://images.gitbook.cn/724f0d60-0f5d-11ea-8177-b393854d56fa" alt="在这里插入图片描述"></p>
+<p>然后复制你那边说说的链接地址，为图中红色部分。粘贴到图1</p>
+<p>图3：</p>
+<p><img src="https://images.gitbook.cn/9d3f54d0-0f5d-11ea-ab9a-d3628864cc26" alt="在这里插入图片描述"></p>
+<p><strong>2、加入笔者群【区块链之路】，发送以太坊地址给群主免费送手续费</strong></p>
+<p>QQ群号：366614203</p>
+<p><img src="https://images.gitbook.cn/521052e0-0f60-11ea-8177-b393854d56fa" alt="在这里插入图片描述"></p>
+<p>或者点击链接加入群聊【区块链之路】：https://jq.qq.com/?_wv=1027&amp;k=5QBBMIJ</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag1/">tag1</a>
+
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag2/">tag2</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/" data-tooltip="优秀网站收藏">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/" data-tooltip="架构师之Mysql笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 何海涛的博客. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/" data-tooltip="优秀网站收藏">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/" data-tooltip="架构师之Mysql笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%258F%2591%25E8%25A1%258C%25E4%25BB%25A5%25E5%25A4%25AA%25E5%259D%258A%25E8%25B5%2584%25E4%25BA%25A7%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%258F%2591%25E8%25A1%258C%25E4%25BB%25A5%25E5%25A4%25AA%25E5%259D%258A%25E8%25B5%2584%25E4%25BA%25A7%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%258F%2591%25E8%25A1%258C%25E4%25BB%25A5%25E5%25A4%25AA%25E5%259D%258A%25E8%25B5%2584%25E4%25BA%25A7%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">何海涛的博客</h4>
+    
+      <div id="about-card-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        PM
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        SZ
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hehaitao.vip/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://hehaitao.vip/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hehaitao.vip\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7\/';
+          
+            this.page.identifier = '\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'adityamangal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

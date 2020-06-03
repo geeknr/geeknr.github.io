@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>区块链 on 何海涛的博客</title>
+    <link>https://hehaitao.vip/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <description>Recent content in 区块链 on 何海涛的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 03 Jun 2020 14:08:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://hehaitao.vip/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>区块链之发行以太坊资产</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/</link>
+      <pubDate>Wed, 03 Jun 2020 14:08:33 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/</guid>
+      <description>&lt;p&gt;imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

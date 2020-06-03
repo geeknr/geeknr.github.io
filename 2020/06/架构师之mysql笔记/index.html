@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.66.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="何海涛的博客">
+<meta name="keywords" content="tech">
+<meta name="description" content="据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！">
+
+
+<meta property="og:description" content="据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构师之Mysql笔记">
+<meta name="twitter:title" content="架构师之Mysql笔记">
+<meta property="og:url" content="https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+<meta property="twitter:url" content="https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+<meta property="og:site_name" content="何海涛的博客">
+<meta property="og:description" content="据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！">
+<meta name="twitter:description" content="据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-03T14:01:06">
+  
+  
+    <meta property="article:modified_time" content="2020-06-03T14:01:06">
+  
+  
+  
+    
+      <meta property="article:section" content="数据库">
+    
+  
+  
+    
+      <meta property="article:tag" content="mysql">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@adityamangal410">
+
+
+  <meta name="twitter:creator" content="@adityamangal410">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://hehaitao.vip/profile.jpg">
+  <meta property="twitter:image" content="https://hehaitao.vip/profile.jpg">
+
+
+    <title>架构师之Mysql笔记</title>
+
+    <link rel="icon" href="https://hehaitao.vip/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://hehaitao.vip/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-78062737-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://hehaitao.vip/">何海涛的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://hehaitao.vip/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://hehaitao.vip/#about">
+          <img class="sidebar-profile-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">何海涛的博客</h4>
+        
+          <h5 class="sidebar-profile-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/adityamangal410/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:adityamangal410@yahoo.co.in" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      架构师之Mysql笔记
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-03T14:01:06&#43;08:00">
+        
+  六月 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/%e6%95%b0%e6%8d%ae%e5%ba%93">数据库</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！</p>
+<h2 id="文章引言">文章引言</h2>
+<h2 id="实例讲解">实例讲解</h2>
+<p>进入数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -uroot -p123456 -P23306
+</code></pre></div><p>创建数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">create database hmsc DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
+</code></pre></div><p>授权访问</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GRANT ALL PRIVILEGES ON hmsc.* TO <span style="color:#e6db74">&#39;hmsc&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;hmsc2020&#39;</span> WITH GRANT OPTION;
+</code></pre></div><p>变更刷新</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">flush privileges;
+</code></pre></div><p>打开my.cnf配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim /etc/my.cnf
+</code></pre></div><p>修改端口为23306</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>client<span style="color:#f92672">]</span>
+port <span style="color:#f92672">=</span> 23306
+socket <span style="color:#f92672">=</span> /tmp/mysql.sock
+
+<span style="color:#f92672">[</span>mysql<span style="color:#f92672">]</span>
+prompt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MySQL [\d]&gt; &#34;</span>
+no-auto-rehash
+
+<span style="color:#f92672">[</span>mysqld<span style="color:#f92672">]</span>
+port <span style="color:#f92672">=</span> 23306
+socket <span style="color:#f92672">=</span> /tmp/mysql.sock
+</code></pre></div><p>重启mysql服务</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl restart mysql
+</code></pre></div><h2 id="问题收集">问题收集</h2>
+<h3 id="mysql错误-error-1205-lock-wait-timeout-exceeded解决办法">Mysql错误: ERROR 1205: Lock wait timeout exceeded解决办法</h3>
+<p>我的方法：打开/etc/my.cnf设置MySQL锁等待超时</p>
+<pre><code>innodb_lock_wait_timeout=50
+autocommit=on
+</code></pre><p><strong>该类问题导致原因</strong></p>
+<p>据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！因此出现 Lock wait timeout exceeded</p>
+<h2 id="常用命令汇总">常用命令汇总</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 查看数据库版本</span>
+mysql -V
+
+<span style="color:#75715e"># 创建用户：</span>
+CREATE USER <span style="color:#e6db74">&#39;test&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;123456&#39;</span>;
+
+<span style="color:#75715e"># 移除权限：</span>
+REVOKE privilege ON test.* FROM <span style="color:#e6db74">&#39;test&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span>;
+
+<span style="color:#75715e"># 查看所有数据库：</span> 
+show databases;
+
+
+</code></pre></div><h2 id="高可用方案">高可用方案</h2>
+<p>MySQL 数据库的高可用性分析
+<a href="https://www.cnblogs.com/qq1148932219/p/11692298.html">https://www.cnblogs.com/qq1148932219/p/11692298.html</a></p>
+<h2 id="提升写入速度">提升写入速度</h2>
+<p>配置这几个参数，提高mysql写入速度</p>
+<p>当mysql大批量插入数据的时候就会变的非常慢, mysql提高insert into 插入速度的方法有三种:</p>
+<p><strong>第一种插入提速方法:</strong></p>
+<p>如果数据库中的数据已经很多(几百万条), 那么可以 加大mysql配置中的 bulk_insert_buffer_size，这个参数默认为8M</p>
+<p><code>bulk_insert_buffer_size=100M</code></p>
+<p><strong>第二种mysql插入提速方法:</strong></p>
+<p>改写所有 insert into 语句为 insert delayed into</p>
+<p>这个insert delayed不同之处在于：立即返回结果，后台进行处理插入。</p>
+<p><strong>第三个方法: 一次插入多条数据:</strong></p>
+<p>insert中插入多条数据，举例:</p>
+<p>insert into table values(&lsquo;11&rsquo;,&lsquo;11&rsquo;),(&lsquo;22&rsquo;,&lsquo;22&rsquo;),(&lsquo;33&rsquo;,&lsquo;33&rsquo;)&hellip;;</p>
+<h3 id="innodb_buffer_pool_size">innodb_buffer_pool_size</h3>
+<p>如 果用Innodb，那么这是一个重要变量。相对于MyISAM来说，Innodb对于buffer size更敏感。MySIAM可能对于大数据量使用默认的key_buffer_size也还好，但Innodb在大数据量时用默认值就感觉在爬了。 Innodb的缓冲池会缓存数据和索引，所以不需要给系统的缓存留空间，如果只用Innodb，可以把这个值设为内存的70%-80%。和 key_buffer相同，如果数据量比较小也不怎么增加，那么不要把这个值设太高也可以提高内存的使用率。</p>
+<h3 id="innodb_additional_pool_size">innodb_additional_pool_size</h3>
+<p>这个的效果不是很明显，至少是当操作系统能合理分配内存时。但你可能仍需要设成20M或更多一点以看Innodb会分配多少内存做其他用途。</p>
+<h3 id="innodb_log_file_size">innodb_log_file_size</h3>
+<p>对于写很多尤其是大数据量时非常重要。要注意，大的文件提供更高的性能，但数据库恢复时会用更多的时间。我一般用64M-512M，具体取决于服务器的空间。</p>
+<h3 id="innodb_log_buffer_size">innodb_log_buffer_size</h3>
+<p>默认值对于多数中等写操作和事务短的运用都是可以的。如 果经常做更新或者使用了很多blob数据，应该增大这个值。但太大了也是浪费内存，因为1秒钟总会 flush（这个词的中文怎么说呢？）一次，所以不需要设到超过1秒的需求。8M-16M一般应该够了。小的运用可以设更小一点。</p>
+<h3 id="innodb_flush_log_at_trx_commit--这个很管用">innodb_flush_log_at_trx_commit  （这个很管用）</h3>
+<p>抱怨Innodb比MyISAM慢 100倍？那么你大概是忘了调整这个值。默认值1的意思是每一次事务提交或事务外的指令都需要把日志写入（flush）硬盘，这是很费时的。特别是使用电 池供电缓存（Battery backed up cache）时。设成2对于很多运用，特别是从MyISAM表转过来的是可以的，它的意思是不写入硬盘而是写入系统缓存。日志仍然会每秒flush到硬 盘，所以你一般不会丢失超过1-2秒的更新。设成0会更快一点，但安全方面比较差，即使MySQL挂了也可能会丢失事务的数据。而值2只会在整个操作系统 挂了时才可能丢数据。</p>
+<h2 id="配置文件优化">配置文件优化</h2>
+<p>打开配置文件</p>
+<pre><code>vim /etc/my.cnf
+</code></pre><h3 id="mysql-80版本数据库的配置">mysql 8.0版本数据库的配置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>client<span style="color:#f92672">]</span>
+port                            <span style="color:#f92672">=</span> 23306
+socket                          <span style="color:#f92672">=</span> /var/run/mysqld8/mysql.sock
+host <span style="color:#f92672">=</span> localhost
+user <span style="color:#f92672">=</span> mysqlcheck
+password <span style="color:#f92672">=</span> mysqlcheck@123
+
+
+<span style="color:#f92672">[</span>mysqladmin<span style="color:#f92672">]</span>
+port                            <span style="color:#f92672">=</span> 23306
+socket                          <span style="color:#f92672">=</span> /var/run/mysqld8/mysql.sock
+host <span style="color:#f92672">=</span> localhost
+user <span style="color:#f92672">=</span> mysqlcheck
+password <span style="color:#f92672">=</span> mysqlcheck@123
+
+
+<span style="color:#f92672">[</span>mysql<span style="color:#f92672">]</span>
+no-auto-rehash
+prompt                          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\u@\h:\d \r:\m:\s&gt; &#34;</span>
+socket                          <span style="color:#f92672">=</span> /var/run/mysqld8/mysql.sock
+port                            <span style="color:#f92672">=</span> 23306
+host <span style="color:#f92672">=</span> localhost
+user <span style="color:#f92672">=</span> mysqlcheck
+password <span style="color:#f92672">=</span> mysqlcheck@123
+
+<span style="color:#f92672">[</span>mysqld<span style="color:#f92672">]</span>
+server-id                       <span style="color:#f92672">=</span> 51
+port                            <span style="color:#f92672">=</span> 23306
+mysqlx_port                     <span style="color:#f92672">=</span> 33060
+
+datadir                         <span style="color:#f92672">=</span> /block/mysql_data
+socket                          <span style="color:#f92672">=</span> /var/run/mysqld8/mysql.sock
+mysqlx_socket                   <span style="color:#f92672">=</span> /var/run/mysqld8/mysqlx.sock
+pid-file                        <span style="color:#f92672">=</span> /var/run/mysqld8/mysqld.pid
+
+default-authentication-plugin   <span style="color:#f92672">=</span> mysql_native_password
+lower_case_table_names          <span style="color:#f92672">=</span> 1
+max_connections                 <span style="color:#f92672">=</span> 10000
+open_files_limit                <span style="color:#f92672">=</span> 100000
+
+
+<span style="color:#75715e"># 服务日志</span>
+log-error                       <span style="color:#f92672">=</span> /var/log/mysql8/mysqld.log
+<span style="color:#75715e"># 启用所有日志</span>
+<span style="color:#75715e"># general-log-file                = /var/log/mysql8/general.log</span>
+<span style="color:#75715e"># 启用慢查询日志</span>
+<span style="color:#75715e"># slow-query-log-file             = /var/log/mysql8/query.log</span>
+<span style="color:#75715e"># 默认时间10秒</span>
+<span style="color:#75715e"># long-query-time                 = 5</span>
+<span style="color:#75715e"># 记录没有使用索引查询的sql命令</span>
+
+<span style="color:#75715e"># log-queries-not-using-indexes</span>
+
+gtid-mode                       <span style="color:#f92672">=</span> on
+enforce-gtid-consistency        <span style="color:#f92672">=</span> on
+log-bin                         <span style="color:#f92672">=</span> binlog
+binlog_format                   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mixed&#34;</span>
+<span style="color:#75715e"># # master 只允许同步的库，只不允许同步的库</span>
+<span style="color:#75715e"># binlog_do_db                    = dbname1,dbname2</span>
+<span style="color:#75715e"># binlog_ignore_db                = dbname1,dbname2</span>
+<span style="color:#75715e"># # slave 级联复制，只同步的库，只不同步的库</span>
+<span style="color:#75715e"># log_slave_updates</span>
+<span style="color:#75715e"># replicate_do_db                 = dbname1,dbname2</span>
+<span style="color:#75715e"># replicate_ignore_db             = dbname1,dbname2</span>
+
+default_storage_engine <span style="color:#f92672">=</span> InnoDB
+innodb_file_per_table <span style="color:#f92672">=</span> 1
+innodb_open_files <span style="color:#f92672">=</span> 100000
+innodb_buffer_pool_size <span style="color:#f92672">=</span> 8192M
+innodb_write_io_threads <span style="color:#f92672">=</span> 4
+innodb_read_io_threads <span style="color:#f92672">=</span> 4
+innodb_thread_concurrency <span style="color:#f92672">=</span> 16
+innodb_purge_threads <span style="color:#f92672">=</span> 1
+innodb_flush_log_at_trx_commit <span style="color:#f92672">=</span> 2
+innodb_log_buffer_size <span style="color:#f92672">=</span> 2M
+innodb_log_file_size <span style="color:#f92672">=</span> 256M
+innodb_log_files_in_group <span style="color:#f92672">=</span> 2
+innodb_max_dirty_pages_pct <span style="color:#f92672">=</span> 90
+innodb_lock_wait_timeout <span style="color:#f92672">=</span> 120
+<span style="color:#75715e"># innodb_data_file_path=ibdata1:1G:autoextend</span>
+innodb_data_file_path<span style="color:#f92672">=</span>ibdata1:10M:autoextend
+
+bulk_insert_buffer_size <span style="color:#f92672">=</span> 100M
+
+myisam_sort_buffer_size <span style="color:#f92672">=</span> 64M
+myisam_max_sort_file_size <span style="color:#f92672">=</span> 10G
+myisam_repair_threads <span style="color:#f92672">=</span> 1
+
+interactive_timeout <span style="color:#f92672">=</span> 28800
+wait_timeout <span style="color:#f92672">=</span> 28800
+
+</code></pre></div><h3 id="mysql-57版本数据库的配置">mysql 5.7版本数据库的配置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>client<span style="color:#f92672">]</span>
+port <span style="color:#f92672">=</span> 3306
+socket <span style="color:#f92672">=</span> /tmp/mysql.sock
+
+<span style="color:#f92672">[</span>mysql<span style="color:#f92672">]</span>
+prompt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MySQL [\d]&gt; &#34;</span>
+no-auto-rehash 
+
+<span style="color:#f92672">[</span>mysqld<span style="color:#f92672">]</span>
+port <span style="color:#f92672">=</span> 3306
+socket <span style="color:#f92672">=</span> /tmp/mysql.sock
+
+basedir <span style="color:#f92672">=</span> /usr/local/mysql
+datadir <span style="color:#f92672">=</span> /data/mysql
+pid-file <span style="color:#f92672">=</span> /data/mysql/mysql.pid
+user <span style="color:#f92672">=</span> mysql
+bind-address <span style="color:#f92672">=</span> 0.0.0.0
+server-id <span style="color:#f92672">=</span> 1
+
+init-connect <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SET NAMES utf8mb4&#39;</span>
+character-set-server <span style="color:#f92672">=</span> utf8mb4
+
+skip-name-resolve
+<span style="color:#75715e">#skip-networking</span>
+back_log <span style="color:#f92672">=</span> 300
+
+max_connections <span style="color:#f92672">=</span> 612
+max_connect_errors <span style="color:#f92672">=</span> 6000
+open_files_limit <span style="color:#f92672">=</span> 65535
+table_open_cache <span style="color:#f92672">=</span> 256
+max_allowed_packet <span style="color:#f92672">=</span> 500M
+binlog_cache_size <span style="color:#f92672">=</span> 1M
+max_heap_table_size <span style="color:#f92672">=</span> 8M
+tmp_table_size <span style="color:#f92672">=</span> 32M
+
+read_buffer_size <span style="color:#f92672">=</span> 2M
+read_rnd_buffer_size <span style="color:#f92672">=</span> 8M
+sort_buffer_size <span style="color:#f92672">=</span> 8M
+join_buffer_size <span style="color:#f92672">=</span> 8M 
+key_buffer_size <span style="color:#f92672">=</span> 16M
+
+thread_cache_size <span style="color:#f92672">=</span> 16
+
+query_cache_type <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> 
+query_cache_size <span style="color:#f92672">=</span> 16M
+query_cache_limit <span style="color:#f92672">=</span> 2M
+
+ft_min_word_len <span style="color:#f92672">=</span> 4
+
+log_bin <span style="color:#f92672">=</span> mysql-bin
+binlog_format <span style="color:#f92672">=</span> mixed
+expire_logs_days <span style="color:#f92672">=</span> 7
+
+log_error <span style="color:#f92672">=</span> /data/mysql/mysql-error.log
+slow_query_log <span style="color:#f92672">=</span> 1
+long_query_time <span style="color:#f92672">=</span> 1
+slow_query_log_file <span style="color:#f92672">=</span> /data/mysql/mysql-slow.log
+
+performance_schema <span style="color:#f92672">=</span> 0
+explicit_defaults_for_timestamp
+
+<span style="color:#75715e">#lower_case_table_names = 1</span>
+
+skip-external-locking
+
+default_storage_engine <span style="color:#f92672">=</span> InnoDB
+<span style="color:#75715e">#default-storage-engine = MyISAM</span>
+innodb_file_per_table <span style="color:#f92672">=</span> 1
+innodb_open_files <span style="color:#f92672">=</span> 500
+innodb_buffer_pool_size <span style="color:#f92672">=</span> 128M
+innodb_write_io_threads <span style="color:#f92672">=</span> 4
+innodb_read_io_threads <span style="color:#f92672">=</span> 4
+innodb_thread_concurrency <span style="color:#f92672">=</span> 0
+innodb_purge_threads <span style="color:#f92672">=</span> 1
+innodb_flush_log_at_trx_commit <span style="color:#f92672">=</span> 2
+innodb_log_buffer_size <span style="color:#f92672">=</span> 2M
+innodb_log_file_size <span style="color:#f92672">=</span> 32M
+innodb_log_files_in_group <span style="color:#f92672">=</span> 3
+innodb_max_dirty_pages_pct <span style="color:#f92672">=</span> 90
+innodb_lock_wait_timeout <span style="color:#f92672">=</span> 120
+
+bulk_insert_buffer_size <span style="color:#f92672">=</span> 8M
+myisam_sort_buffer_size <span style="color:#f92672">=</span> 16M
+myisam_max_sort_file_size <span style="color:#f92672">=</span> 10G
+myisam_repair_threads <span style="color:#f92672">=</span> 1
+
+interactive_timeout <span style="color:#f92672">=</span> 28800
+wait_timeout <span style="color:#f92672">=</span> 28800
+
+<span style="color:#f92672">[</span>mysqldump<span style="color:#f92672">]</span>
+quick
+max_allowed_packet <span style="color:#f92672">=</span> 500M
+
+<span style="color:#f92672">[</span>myisamchk<span style="color:#f92672">]</span>
+key_buffer_size <span style="color:#f92672">=</span> 16M
+sort_buffer_size <span style="color:#f92672">=</span> 8M
+read_buffer <span style="color:#f92672">=</span> 4M
+write_buffer <span style="color:#f92672">=</span> 4M
+</code></pre></div><h2 id="关于我们">关于我们</h2>
+<p>为程序员提供优质博文、实战笔记、开发资源、学习资料内容包括：区块链、架构、Golang、Vuejs、Python、Nodejs、C/C++函数库等等。并不定期奉送各种福利。</p>
+<p><img src="https://img.vim-cn.com/5f/63ba18d1e1e7a78c8c7f8ffc83636fd8a3798d.jpg" alt="我是图片"></p>
+<blockquote>
+<p>欢迎订阅：极客笔记Geeknr</p>
+<p>我的名言：梦想还是要有的，万一实现了呢？</p>
+<p>原文链接：http://blog.geeknr.com/index.php/archives/22/</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/mysql/">mysql</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/" data-tooltip="区块链之发行以太坊资产">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/centos%E4%B9%8Bsystemd%E6%9C%8D%E5%8A%A1/" data-tooltip="CentOS之Systemd服务">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 何海涛的博客. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/" data-tooltip="区块链之发行以太坊资产">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/centos%E4%B9%8Bsystemd%E6%9C%8D%E5%8A%A1/" data-tooltip="CentOS之Systemd服务">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E6%259E%25B6%25E6%259E%2584%25E5%25B8%2588%25E4%25B9%258Bmysql%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E6%259E%25B6%25E6%259E%2584%25E5%25B8%2588%25E4%25B9%258Bmysql%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E6%259E%25B6%25E6%259E%2584%25E5%25B8%2588%25E4%25B9%258Bmysql%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">何海涛的博客</h4>
+    
+      <div id="about-card-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        PM
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        SZ
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hehaitao.vip/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://hehaitao.vip/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hehaitao.vip\/2020\/06\/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0\/';
+          
+            this.page.identifier = '\/2020\/06\/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'adityamangal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

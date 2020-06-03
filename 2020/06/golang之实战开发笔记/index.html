@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.66.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="何海涛的博客">
+<meta name="keywords" content="tech">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang之实战开发笔记">
+<meta name="twitter:title" content="Golang之实战开发笔记">
+<meta property="og:url" content="https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+<meta property="twitter:url" content="https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+<meta property="og:site_name" content="何海涛的博客">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-03T14:35:29">
+  
+  
+    <meta property="article:modified_time" content="2020-06-03T14:35:29">
+  
+  
+  
+    
+      <meta property="article:section" content="category">
+    
+      <meta property="article:section" content="subcategory">
+    
+  
+  
+    
+      <meta property="article:tag" content="tag1">
+    
+      <meta property="article:tag" content="tag2">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@adityamangal410">
+
+
+  <meta name="twitter:creator" content="@adityamangal410">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://hehaitao.vip/profile.jpg">
+  <meta property="twitter:image" content="https://hehaitao.vip/profile.jpg">
+
+
+    <title>Golang之实战开发笔记</title>
+
+    <link rel="icon" href="https://hehaitao.vip/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://hehaitao.vip/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-78062737-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://hehaitao.vip/">何海涛的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://hehaitao.vip/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://hehaitao.vip/#about">
+          <img class="sidebar-profile-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">何海涛的博客</h4>
+        
+          <h5 class="sidebar-profile-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/adityamangal410/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:adityamangal410@yahoo.co.in" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Golang之实战开发笔记
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-03T14:35:29&#43;08:00">
+        
+  六月 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/category">category</a>, 
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/subcategory">subcategory</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Golang从入门到实战，其中很多在工作当中能够用到，个人把所以到内容整理起来方便查找，更希望对其他人有帮助！</p>
+<h2 id="获取当前时间">获取当前时间</h2>
+<pre><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func main() {
+
+    t := time.Now()   //2019-07-31 13:55:21.3410012 +0800 CST m=+0.006015601
+    fmt.Println(t.Format(&quot;20060102150405&quot;))
+
+    //当前时间戳
+    t1 := time.Now().Unix()  //1564552562
+    fmt.Println(t1)
+    //时间戳转化为具体时间
+    fmt.Println(time.Unix(t1, 0).String())
+
+    //基本格式化的时间表示
+    fmt.Println(time.Now().String()) //2019-07-31 13:56:35.7766729 +0800 CST m=+0.005042501
+
+    fmt.Println(time.Now().Format(&quot;2006-01-02&quot;))  //2019-07-31
+    fmt.Println(time.Now().Format(&quot;2006-01-02 15:04:05&quot;))  //2019-07-31 13:57:52
+
+    //获取第几周
+    _, week := time.Now().ISOWeek()  
+    //获取年、月、日
+    year, month, day := rwTools.DateYmdInts() 
+}
+
+// 时间戳转年月日 时分秒
+func DateFormat(timestamp int) string {
+    tm := time.Unix(int64(timestamp), 0)
+    return tm.Format(&quot;2006-01-02 15:04&quot;)
+}
+
+//时间戳转年月日
+func DateFormatYmd(timestamp int) string {
+    tm := time.Unix(int64(timestamp), 0)
+    return tm.Format(&quot;2006-01-02&quot;)
+}
+
+//获取当前年月
+func DateYmFormat() string {
+    tm := time.Now()
+    return tm.Format(&quot;2006-01&quot;)
+}
+
+//获取年月日时分秒（字符串类型）
+func DateNowFormatStr() string {
+    tm := time.Now()
+    return tm.Format(&quot;2006-01-02 15:04:05&quot;)
+}
+
+//时间戳
+func DateUnix() int {
+    t := time.Now().Local().Unix()
+    return int(t)
+}
+
+//获取年月日时分秒(time类型)
+func DateNowFormat() time.Time {
+    tm := time.Now()
+    return tm
+}
+
+//获取第几周
+func DateWeek() int {
+    _, week := time.Now().ISOWeek()
+    return week
+}
+
+//获取年、月、日
+func DateYMD() (int,int, int) {
+    year, month, day := DateYmdInts()
+    return year,month,day
+}
+
+// 获取年月日
+func DateYmdFormat() string {
+    tm := time.Now()
+    return tm.Format(&quot;2006-01-02&quot;)
+}
+
+// 获取日期的年月日
+func DateYmdInts() (int, int, int) {
+    timeNow := time.Now()
+    year, month, day := timeNow.Date()
+    return year, int(month), day
+}
+
+
+</code></pre><h2 id="数组指针和指针数组">数组指针和指针数组</h2>
+<pre><code>package main
+
+import &quot;fmt&quot;
+
+func main(){
+	x,y := 1, 2
+	var arr =  [...]int{5:2}
+	//数组指针
+	var pf *[6]int = &amp;arr
+
+	//指针数组
+	pfArr := [...]*int{&amp;x,&amp;y}
+	fmt.Println(pf)
+	fmt.Println(pfArr)
+}
+</code></pre><h2 id="递归实现无限树">递归实现无限树</h2>
+<pre><code>package main
+
+import (
+	&quot;fmt&quot;
+)
+
+type cate struct {
+	id   int
+	name string
+	pid  int
+	//son  *cate
+}
+
+type cateTree struct {
+	id   int
+	name string
+	pid  int
+	son  []cateTree
+}
+
+func main() {
+	allCate := []cate{
+		cate{1, &quot;a&quot;, 0},
+		cate{2, &quot;b&quot;, 0},
+		cate{3, &quot;c&quot;, 0},
+		cate{4, &quot;aa&quot;, 1},
+		cate{5, &quot;bb&quot;, 2},
+		cate{6, &quot;cc&quot;, 3},
+		cate{7, &quot;aaa&quot;, 4},
+		cate{8, &quot;bbb&quot;, 5},
+		cate{9, &quot;ccc&quot;, 6},
+	}
+
+	//实现无限级分类
+	//arr := superCategory(allCate, 0)
+	arr := superCategoryTree(allCate, 0)
+	fmt.Println(arr)
+
+}
+
+
+//递归实现
+func superCategory(allCate []cate, pid int) []cate {
+	var arr []cate
+	for _, v := range allCate {
+		if pid == v.pid {
+			arr = append(arr, v)
+			sonCate := superCategory(allCate, v.id)
+			arr = append(arr, sonCate...)
+		}
+	}
+	return arr
+}
+
+//递归实现(返回树状结果得数据)
+func superCategoryTree(allCate []cate, pid int) []cateTree {
+	var arr []cateTree
+	for _, v := range allCate {
+		if pid == v.pid {
+			ctree := cateTree{}
+			ctree.id = v.id
+			ctree.pid = v.pid
+			ctree.name = v.name
+			sonCate := superCategoryTree(allCate, v.id)
+			ctree.son = sonCate
+			arr = append(arr, ctree)
+		}
+	}
+	return arr
+}
+
+</code></pre><h2 id="在线编辑器">在线编辑器</h2>
+<p><a href="https://play.golang.org/">https://play.golang.org/</a></p>
+<h2 id="json解析操作">json解析操作</h2>
+<p><strong>struct空值的json直接不展示</strong></p>
+<pre><code>type Node struct {
+    Name string `json:name,omitempty` // 名称
+    Age int `json:age` // 年龄
+}
+</code></pre><p><strong>序列化与反序列化</strong></p>
+<pre><code>package main
+
+import (
+	&quot;encoding/json&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	str := `{&quot;msg&quot;:&quot;\u8be5\u5355\u53f7\u6682\u65e0\u7269\u6d41\u8fdb\u5c55\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff0c\u6216\u68c0\u67e5\u516c\u53f8\u548c\u5355\u53f7\u662f\u5426\u6709\u8bef\u3002&quot;,&quot;status&quot;:&quot;-3&quot;,&quot;error_code&quot;:&quot;13&quot;,&quot;data&quot;:{&quot;info&quot;:{&quot;status&quot;:&quot;0&quot;,&quot;msg&quot;:&quot;\u8be5\u5355\u53f7\u6682\u65e0\u7269\u6d41\u8fdb\u5c55\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff0c\u6216\u68c0\u67e5\u516c\u53f8\u548c\u5355\u53f7\u662f\u5426\u6709\u8bef\u3002&quot;,&quot;_source_com&quot;:&quot;&quot;},&quot;com&quot;:&quot;zhongtong&quot;,&quot;company&quot;:{&quot;url&quot;:&quot;http:\/\/www.zto.com\/?from=openv&quot;,&quot;fullname&quot;:&quot;\u4e2d\u901a\u5feb\u9012&quot;,&quot;shortname&quot;:&quot;\u4e2d\u901a&quot;,&quot;icon&quot;:{&quot;id&quot;:&quot;29&quot;,&quot;smallurl&quot;:&quot;https:\/\/ss0.baidu.com\/6ONWsjip0QIZ8tyhnq\/it\/u=3682653099,2524883494&amp;fm=58&quot;,&quot;smallpos&quot;:&quot;0,496&quot;,&quot;middleurl&quot;:&quot;https:\/\/ss2.baidu.com\/6ONYsjip0QIZ8tyhnq\/it\/u=1078213688,3146076104&amp;fm=58&quot;,&quot;middlepos&quot;:&quot;0,324&quot;,&quot;normal&quot;:&quot;https:\/\/ss0.baidu.com\/6ONWsjip0QIZ8tyhnq\/it\/u=1022514261,1855787563&amp;fm=58&quot;},&quot;website&quot;:{&quot;title&quot;:&quot;www.zto.com&quot;,&quot;url&quot;:&quot;http:\/\/www.zto.com&quot;},&quot;tel&quot;:&quot;95311&quot;,&quot;auxiliary&quot;:[{&quot;title&quot;:&quot;\u7f51\u70b9\u67e5\u8be2&quot;,&quot;url&quot;:&quot;http:\/\/www.zto.com\/GuestService\/SiteQuery&quot;},{&quot;title&quot;:&quot;\u7f51\u4e0a\u5bc4\u4ef6&quot;,&quot;url&quot;:&quot;http:\/\/my.zto.com\/order&quot;},{&quot;title&quot;:&quot;\u4ef7\u683c\u67e5\u8be2&quot;,&quot;url&quot;:&quot;http:\/\/www.zto.com\/GuestService\/PriceQuery&quot;},{&quot;title&quot;:&quot;\u4e2d\u901a\u4f18\u9009&quot;,&quot;url&quot;:&quot;http:\/\/www.ztbest.com&quot;}]},&quot;source&quot;:{&quot;logo&quot;:&quot;https:\/\/ss2.baidu.com\/6ONYsjip0QIZ8tyhnq\/it\/u=1429564979,1787167512&amp;fm=58&quot;,&quot;title&quot;:&quot;\u6570\u636e\u6765\u81ea\u5feb\u9012100&quot;,&quot;url&quot;:&quot;http:\/\/www.kuaidi100.com\/?from=baidu_ala&quot;,&quot;name&quot;:&quot;\u5feb\u9012100&quot;,&quot;showName&quot;:&quot;\u5feb\u9012100&quot;}}}`
+	data := make(map[string]interface{})
+	json.Unmarshal([]byte(str), &amp;data)
+	newStr, err := json.Marshal(data)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(&quot;===&quot;, string(newStr))
+}
+
+</code></pre><h2 id="windows编译linux文件脚本">windows编译linux文件脚本</h2>
+<pre><code>cd %GOPATH%/src/geeknr.com/carsvr
+
+if exist &quot;carsvr&quot; del carsvr
+if exist &quot;carsvr.zip&quot; del carsvr.zip
+
+set GO111MODULE=on
+set GOOS=linux
+set GOARCH=amd64
+go build
+
+zip.exe -r carsvr.zip carsvr
+
+if exist &quot;carsvr&quot; del carsvr
+</code></pre><h2 id="math-包下常用的一些方法">math 包下常用的一些方法</h2>
+<pre><code>package main
+
+import (
+	&quot;fmt&quot;
+	&quot;math&quot;
+ 
+)
+func main() {
+	i := 1
+	fmt.Println(math.Abs(float64(i)))		//取到绝对值
+	fmt.Println(math.Ceil(3.8))				//向上取整
+	fmt.Println(math.Floor(3.6))			//向下取整
+	fmt.Println(math.Mod(11,3))				//取余数 11%3 效果一样
+	fmt.Println(math.Modf(3.22))			//取整数跟小数
+	fmt.Println(math.Pow(3,2))				//X 的 Y次方
+	fmt.Println(math.Pow10(3))				//10的N次方
+	fmt.Println(math.Sqrt(8))				//开平方
+	fmt.Println(math.Cbrt(8))				//开立方
+	fmt.Println(math.Pi)					//π
+}
+</code></pre><h2 id="类型转换">类型转换</h2>
+<p>string 到 int</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span>, err: <span style="color:#f92672">=</span> strconv.Atoi(string)
+</code></pre></div><p>string 到 int64</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">int64</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">ParseInt</span>(<span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">64</span>)
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">第三个参数位大小表示期望转换的结果类型</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">其值可以为0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span><span style="color:#a6e22e">和64</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">分别对应</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int8</span>, <span style="color:#66d9ef">int16</span>, <span style="color:#a6e22e">int32和int64</span>
+</code></pre></div><p>int 到 string</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">string</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Itoa</span>(<span style="color:#66d9ef">int</span>)
+<span style="color:#a6e22e">等价于</span> <span style="color:#66d9ef">string</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatInt</span>(int64(<span style="color:#66d9ef">int</span>), <span style="color:#ae81ff">10</span>)
+</code></pre></div><p>int64 到 string</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">string</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatInt</span>(<span style="color:#66d9ef">int64</span>, <span style="color:#ae81ff">10</span>)
+</code></pre></div><p>int 到 int64</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">int64_</span> <span style="color:#f92672">:=</span> int64(<span style="color:#ae81ff">1234</span>)
+</code></pre></div><p>float 到 string</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">string</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatFloat</span>(<span style="color:#66d9ef">float32</span>, <span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">32</span>)
+<span style="color:#66d9ef">string</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatFloat</span>(<span style="color:#66d9ef">float64</span>, <span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">64</span>)
+</code></pre></div><p>string 到 float</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">float</span>, err :<span style="color:#f92672">=</span> strconv.ParseFloat(string, <span style="color:#ae81ff">64</span>)
+<span style="color:#66d9ef">float</span>, err :<span style="color:#f92672">=</span> strconv.ParseFloat(string, <span style="color:#ae81ff">32</span>)
+</code></pre></div><h2 id="go-by-examplehttpsgobyexamplecom"><a href="https://gobyexample.com/">Go by Example</a></h2>
+<p><a href="http://golang.org/">Go</a> is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p><em>Go by Example</em> is a hands-on introduction to Go using annotated example programs. Check out the <a href="https://gobyexample.com/hello-world">first example</a> or browse the full list below.</p>
+<ul>
+<li><a href="https://gobyexample.com/hello-world">Hello World</a></li>
+<li><a href="https://gobyexample.com/values">Values</a></li>
+<li><a href="https://gobyexample.com/variables">Variables</a></li>
+<li><a href="https://gobyexample.com/constants">Constants</a></li>
+<li><a href="https://gobyexample.com/for">For</a></li>
+<li><a href="https://gobyexample.com/if-else">If/Else</a></li>
+<li><a href="https://gobyexample.com/switch">Switch</a></li>
+<li><a href="https://gobyexample.com/arrays">Arrays</a></li>
+<li><a href="https://gobyexample.com/slices">Slices</a></li>
+<li><a href="https://gobyexample.com/maps">Maps</a></li>
+<li><a href="https://gobyexample.com/range">Range</a></li>
+<li><a href="https://gobyexample.com/functions">Functions</a></li>
+<li><a href="https://gobyexample.com/multiple-return-values">Multiple Return Values</a></li>
+<li><a href="https://gobyexample.com/variadic-functions">Variadic Functions</a></li>
+<li><a href="https://gobyexample.com/closures">Closures</a></li>
+<li><a href="https://gobyexample.com/recursion">Recursion</a></li>
+<li><a href="https://gobyexample.com/pointers">Pointers</a></li>
+<li><a href="https://gobyexample.com/structs">Structs</a></li>
+<li><a href="https://gobyexample.com/methods">Methods</a></li>
+<li><a href="https://gobyexample.com/interfaces">Interfaces</a></li>
+<li><a href="https://gobyexample.com/errors">Errors</a></li>
+<li><a href="https://gobyexample.com/goroutines">Goroutines</a></li>
+<li><a href="https://gobyexample.com/channels">Channels</a></li>
+<li><a href="https://gobyexample.com/channel-buffering">Channel Buffering</a></li>
+<li><a href="https://gobyexample.com/channel-synchronization">Channel Synchronization</a></li>
+<li><a href="https://gobyexample.com/channel-directions">Channel Directions</a></li>
+<li><a href="https://gobyexample.com/select">Select</a></li>
+<li><a href="https://gobyexample.com/timeouts">Timeouts</a></li>
+<li><a href="https://gobyexample.com/non-blocking-channel-operations">Non-Blocking Channel Operations</a></li>
+<li><a href="https://gobyexample.com/closing-channels">Closing Channels</a></li>
+<li><a href="https://gobyexample.com/range-over-channels">Range over Channels</a></li>
+<li><a href="https://gobyexample.com/timers">Timers</a></li>
+<li><a href="https://gobyexample.com/tickers">Tickers</a></li>
+<li><a href="https://gobyexample.com/worker-pools">Worker Pools</a></li>
+<li><a href="https://gobyexample.com/waitgroups">WaitGroups</a></li>
+<li><a href="https://gobyexample.com/rate-limiting">Rate Limiting</a></li>
+<li><a href="https://gobyexample.com/atomic-counters">Atomic Counters</a></li>
+<li><a href="https://gobyexample.com/mutexes">Mutexes</a></li>
+<li><a href="https://gobyexample.com/stateful-goroutines">Stateful Goroutines</a></li>
+<li><a href="https://gobyexample.com/sorting">Sorting</a></li>
+<li><a href="https://gobyexample.com/sorting-by-functions">Sorting by Functions</a></li>
+<li><a href="https://gobyexample.com/panic">Panic</a></li>
+<li><a href="https://gobyexample.com/defer">Defer</a></li>
+<li><a href="https://gobyexample.com/collection-functions">Collection Functions</a></li>
+<li><a href="https://gobyexample.com/string-functions">String Functions</a></li>
+<li><a href="https://gobyexample.com/string-formatting">String Formatting</a></li>
+<li><a href="https://gobyexample.com/regular-expressions">Regular Expressions</a></li>
+<li><a href="https://gobyexample.com/json">JSON</a></li>
+<li><a href="https://gobyexample.com/xml">XML</a></li>
+<li><a href="https://gobyexample.com/time">Time</a></li>
+<li><a href="https://gobyexample.com/epoch">Epoch</a></li>
+<li><a href="https://gobyexample.com/time-formatting-parsing">Time Formatting / Parsing</a></li>
+<li><a href="https://gobyexample.com/random-numbers">Random Numbers</a></li>
+<li><a href="https://gobyexample.com/number-parsing">Number Parsing</a></li>
+<li><a href="https://gobyexample.com/url-parsing">URL Parsing</a></li>
+<li><a href="https://gobyexample.com/sha1-hashes">SHA1 Hashes</a></li>
+<li><a href="https://gobyexample.com/base64-encoding">Base64 Encoding</a></li>
+<li><a href="https://gobyexample.com/reading-files">Reading Files</a></li>
+<li><a href="https://gobyexample.com/writing-files">Writing Files</a></li>
+<li><a href="https://gobyexample.com/line-filters">Line Filters</a></li>
+<li><a href="https://gobyexample.com/file-paths">File Paths</a></li>
+<li><a href="https://gobyexample.com/directories">Directories</a></li>
+<li><a href="https://gobyexample.com/temporary-files-and-directories">Temporary Files and Directories</a></li>
+<li><a href="https://gobyexample.com/testing">Testing</a></li>
+<li><a href="https://gobyexample.com/command-line-arguments">Command-Line Arguments</a></li>
+<li><a href="https://gobyexample.com/command-line-flags">Command-Line Flags</a></li>
+<li><a href="https://gobyexample.com/command-line-subcommands">Command-Line Subcommands</a></li>
+<li><a href="https://gobyexample.com/environment-variables">Environment Variables</a></li>
+<li><a href="https://gobyexample.com/http-clients">HTTP Clients</a></li>
+<li><a href="https://gobyexample.com/http-servers">HTTP Servers</a></li>
+<li><a href="https://gobyexample.com/context">Context</a></li>
+<li><a href="https://gobyexample.com/spawning-processes">Spawning Processes</a></li>
+<li><a href="https://gobyexample.com/execing-processes">Exec&rsquo;ing Processes</a></li>
+<li><a href="https://gobyexample.com/signals">Signals</a></li>
+<li><a href="https://gobyexample.com/exit">Exit</a></li>
+</ul>
+<p>by <a href="https://markmcgranaghan.com/">Mark McGranaghan</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag1/">tag1</a>
+
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag2/">tag2</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-1/" data-tooltip="创业家分享 1">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" data-tooltip="区块链之技术开发指南">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 何海涛的博客. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-1/" data-tooltip="创业家分享 1">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" data-tooltip="区块链之技术开发指南">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2Fgolang%25E4%25B9%258B%25E5%25AE%259E%25E6%2588%2598%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2Fgolang%25E4%25B9%258B%25E5%25AE%259E%25E6%2588%2598%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2Fgolang%25E4%25B9%258B%25E5%25AE%259E%25E6%2588%2598%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">何海涛的博客</h4>
+    
+      <div id="about-card-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        PM
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        SZ
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hehaitao.vip/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://hehaitao.vip/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hehaitao.vip\/2020\/06\/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0\/';
+          
+            this.page.identifier = '\/2020\/06\/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'adityamangal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

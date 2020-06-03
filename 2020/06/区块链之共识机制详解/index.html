@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.66.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="何海涛的博客">
+<meta name="keywords" content="tech">
+<meta name="description" content="我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。">
+
+
+<meta property="og:description" content="我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链之共识机制详解">
+<meta name="twitter:title" content="区块链之共识机制详解">
+<meta property="og:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+<meta property="twitter:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+<meta property="og:site_name" content="何海涛的博客">
+<meta property="og:description" content="我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。">
+<meta name="twitter:description" content="我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-03T14:30:37">
+  
+  
+    <meta property="article:modified_time" content="2020-06-03T14:30:37">
+  
+  
+  
+    
+      <meta property="article:section" content="category">
+    
+      <meta property="article:section" content="subcategory">
+    
+  
+  
+    
+      <meta property="article:tag" content="tag1">
+    
+      <meta property="article:tag" content="tag2">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@adityamangal410">
+
+
+  <meta name="twitter:creator" content="@adityamangal410">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://hehaitao.vip/profile.jpg">
+  <meta property="twitter:image" content="https://hehaitao.vip/profile.jpg">
+
+
+    <title>区块链之共识机制详解</title>
+
+    <link rel="icon" href="https://hehaitao.vip/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://hehaitao.vip/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-78062737-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://hehaitao.vip/">何海涛的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://hehaitao.vip/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://hehaitao.vip/#about">
+          <img class="sidebar-profile-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">何海涛的博客</h4>
+        
+          <h5 class="sidebar-profile-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/adityamangal410/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:adityamangal410@yahoo.co.in" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      区块链之共识机制详解
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-03T14:30:37&#43;08:00">
+        
+  六月 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/category">category</a>, 
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/subcategory">subcategory</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。</p>
+<h3 id="工作证明">工作证明</h3>
+<p>最广为人知的共识机制是比特币正在使用的一种，称为“工作量证明”（PoW）。用比特币对PoW进行简短的简化解释如下：通过PoW，计算能力可用于保护区块链并创建新块。所谓的“矿工”（矿工）正试图计算下一个区块的哈希值。哈希是用于密码算法的单词，它重复不可逆，可重复的数字和字母字符串。每个块都包含块头数据和事务。当矿工的节点在网络内部接收到新交易时，它们会将它们包含在实际的块中并继续进行哈希处理。第一个找到正确解决方案（目标哈希）的矿工将获得以比特币为单位的区块奖励（实际奖励为12.5 BTC /区块）。大约每10分钟生成一个新块。由于随着时间的推移，难度越来越高，矿工需要大量的处理能力，而如今的采矿业实际上已成为一种高耗电活动。当然，近来比特币的这种能源消耗现象引起了很多批评，但PoW的替代品已经消耗了更少的能源，尽管其他共识机制能否满足与PoW相同的安全标准有时仍存在争议。</p>
+<h3 id="权益证明">权益证明</h3>
+<p>PoW之后的另一个众所周知的共识机制是“权益证明”（PoS）。PoS是区块链网络旨在达成分布式共识的另一种方法。使用PoS时，通常借助两个最常见的块选择变量之一“随机块选择”和“基于年龄的选择”来选择下一个块的“伪造”。顾名思义，使用“随机区块选择”时，下一个区块的伪造者将通过一个公式来随机选择，该公式将查看最低哈希值+用户权益大小的组合，例如NXT。对于“基于年龄的选择”，必须将未花费一些硬币的时间跨度乘以赌注的大小，以确定谁将伪造下一个区块。<a href="https://peercoin.net/">Peercoin</a>是第一个实施“基于年龄的选择”的加密货币。仅根据帐户余额选择下一个伪造者并不是一个好主意，因为在这种情况下，余额最高的人会一直签名，这将导致系统相当集中。与PoW相比，PoS中没有区块奖励，伪造者仅赚取已签署区块的交易费。好消息是PoS的能源消耗远少于PoW，因此伪造者没有PoW矿工那样的能源消耗大。参与并运行节点的人越多，系统的分散程度就越高。在PoS中实际上可以发现的一个主要（安全）缺陷被称为“无风险”问题： <em>“没有风险”问题的根源在于，对特定版本的股权证明区块链进行投票不需要资源，因此也 <strong>没有机会成本</strong>。由于在特定的链上进行开采没有机会成本，因此矿工没有任何风险。因此，理性的矿工应该简单地在他们看到的每个竞争分支上进行开采，以最大程度地获得他们所获得的采矿收益。” –（<a href="https://medium.com/@abhisharm/understanding-proof-of-stake-through-its-flaws-part-2-nothing-s-at-stake-8d12d826956c">中等– @abhisharm</a>）</em></p>
+<h3 id="股权证明-casper以太坊">股权证明– Casper（以太坊）</h3>
+<p>正如您大多数人可能已经听说的那样，以太坊正计划将名为“ Casper”的新PoS协议纳入其区块链的新共识系统。目标是从能源密集型PoW采矿中转移出去。当然，必须谨慎执行此开关，以免使以太坊面临风险。为了能够实施PoS，必须考虑其他安全措施，例如，通过解决我们上面已经提到的“无风险”问题。使用Casper，验证者将其ETH的一部分作为抵押品，并开始验证区块。然后将根据他们的股份按比例奖励他们，但如果他们以恶意的方式行事，他们将失去以太坊作为惩罚。</p>
+<h3 id="委托权益证明">委托权益证明</h3>
+<p>PoS的一种非常有趣的替代形式称为“委托权益证明”（DPoS）。借助DPoS，并非所有人都能直接参与新区块的创建/伪造，除非得到社区的投票。让我们看一下Lisk的示例，以更好地理解DPoS的工作原理：使用Lisk，每个人都可以注册以换取一些代表费用。但这并不意味着您将能够参与新块的创建过程。要成为活跃的伪造者，您需要得到社区的投票（所有Lisk用户可以投票给他们的信任代表，并根据他们的帐户余额具有一定的投票权）。然后，只有前101名投票最多的代表才能伪造新的代表。每个积极锻造的代表都可以选择自己将与选民分享的伪造Lisk的百分比，这当然激励了人们投票。DPoS的优势是实现共识的更加民主和高效的系统。与比特币的平均区块时间为10分钟相比，Lisk的当前区块时间只有10秒左右，可以通过交易验证新区块。此系统中可能需要考虑的缺点之一是，大多数高级代表共同组成大集团，并迫使选民投票给整个集团，以便获得充分的回报。如果选民不这样做，他将因未对整个小组投票而获得较少的回报。该程序的结果只会导致经济诱因，而并不能真正支持民主制度。</p>
+<h3 id="重要性证明">重要性证明</h3>
+<p>“重要性证明”（PoI）与PoS非常相似，并且由NEM引入。通过PoI，“锻造”新区块被称为“收获”。与PoS相比，其主要优点是“重要性得分”和可防止“无风险”问题的安全系统。“重要性分数”不仅考虑了一些用户的余额，而且还考虑了他的交易频率/行为，这导致了最终结果，该结果确定了收获新区块的机会。通过这种方法，鼓励用户使用和散布其硬币，而不是拿着它们，而只是集中财富。</p>
+<h3 id="烧伤证明">烧伤证明</h3>
+<p>“烧钱证明”（PoB）是PoW＆PoS的一种替代方式，它通过将硬币发送到不可花费的（不可恢复的）地址来“燃烧”某些PoW开采的货币。这些交易记录在区块链上，用户因此而获得奖励。这种方法的激励机制是激励用户在短期内牺牲一些货币，并在以后通过PoB奖励机制从长期收益中获利。用户一开始愿意损失的货币越多，他开采新区块并获得奖励的机会就越大。一方面，PoB的优势可以体现在对用户参与PoB活动时可能接受的项目的长期承诺中。另一方面，不利条件是，例如，您能够燃烧的钱越多，您获得的钱就越多，尽管不能保证取得积极的结果，但这只会使富人变得更富有。此外，某些PoW硬币的燃烧过程可被视为某种能源浪费（首先，您要用电来开采它们，然后燃烧并使其无法使用）。实施PoB作为共识机制的代币的一个例子是Slimcoin。</p>
+<h3 id="授权证明">授权证明</h3>
+<p>“授权证明”（PoA）是PoS的另一种形式，其中身份和声誉被视为权益而不是金钱价值。使用PoA，验证者必须在平台内进行个人识别，并且其身份必须真实。通过这种形式的共识机制，验证者可以公开其身份，以换取伪造新区块的权利，这意味着验证者从其活动中获得的所有收益都是公开可见的，但恶意行为也可见。可以将其视为验证者长期保护和维护网络的良好激励机制，因为其所有行为和活动都与声誉息息相关。</p>
+<h3 id="经过时间证明">经过时间证明</h3>
+<p>“经过时间证明”（PoET）是英特尔引入的一种共识机制。 <em>“ PoET依赖于称为Intel Software Guard Extensions（SGX）的特殊CPU指令集。SGX允许应用程序在受保护的环境中运行受信任的代码。” –（<a href="https://medium.com/kokster/understanding-hyperledger-sawtooth-proof-of-elapsed-time-e0c303577ec1">中– @ kynan.rilee</a>）</em> 与PoW相比，这种共识机制试图在不实施耗能的采矿部分的情况下达到分布式共识的相同结果。PoET以下列方式工作：首先，区块链网络中有许多节点会创建一个随机的等待时间并开始等待。随机等待时间最短的节点将被允许向区块链提交新块，并且“回合”结束。然后，此过程一遍又一遍地重复，并且在每一轮中，另一个节点创建一个新块。这与PoW类似，但没有采矿活动，因此耗电量少得多。</p>
+<h3 id="容量证明">容量证明</h3>
+<p>“容量证明”（PoC）通过允许挖掘设备使用可用的可用硬盘空间来挖掘并将新块提交到区块链来工作。采矿设备甚至可以在实际采矿过程开始之前将潜在解决方案的列表存储在硬盘上。可用空间越多，可以节省的解决方案就越多，因此找到目标哈希并挖掘新块的机会就越高。取决于节点为网络提供多少可用硬盘空间，以本机货币的形式按比例授予奖励。使用PoC作为共识机制的区块链项目有Filecoin，Storj和Burstcoin。</p>
+<h3 id="嫩薄荷pos">嫩薄荷（PoS）</h3>
+<p>Tendermint可以被视为构建<a href="https://en.wikipedia.org/wiki/Byzantine_fault_tolerance">拜占庭容错（BFT）的</a>区块链的协议 。它包含两个主要技术组件： <em>“区块链共识引擎和通用应用程序接口。共识引擎称为Tendermint Core，可确保将相同的事务以相同的顺序记录在每台计算机上。称为应用程序区块链接口（ABCI）的应用程序接口使事务能够以任何编程语言进行处理。与其他预包装有内置状态机（例如精美的键值存储或古怪的脚本语言）的其他区块链和共识解决方案不同，开发人员可以使用Tendermint进行BFT状态机复制，以任何编程语言和开发环境非常适合他们。” –（<a href="http://tendermint.readthedocs.io/projects/tools/en/master/introduction.html">Tendermint Docs –简介</a>）。使用Tendermint的项目示例为Cosmos。</em></p>
+<h3 id="heading"></h3>
+<h5 id="作者">作者：</h5>
+<p>让·安托万·帕雷尔（Jean-Antoine Parrer），2018年6月。如果您对内容有任何疑问，请发送电子邮件至：<a href="mailto:jean.parrer@blockchainhub.net">jean.parrer@blockchainhub.net</a></p>
+<hr>
+<h3 id="支持我们">支持我们</h3>
+<p>我们在https://blockchainhub.net上的目的是教育公众了解这项新技术的功能，潜力和威胁。如果您喜欢我们的工作并从我们的资源中受益，请随时通过捐款支持我们。我们可以发行可抵税的收据。
+<strong>贝宝：</strong> <a href="mailto:hello@blockchainhub.net">hello@blockchainhub.net</a>
+<strong>比特币：</strong> 1NFwzutctYkY88Ak8Ybovcypu58fdWvBp5
+<strong>以太坊：</strong> 0x7edf24bad49c02fa5261e3f392c05decf99908c3</p>
+<h3 id="参考资料和进一步阅读">参考资料和进一步阅读</h3>
+<ul>
+<li><a href="https://blockchainhub.net/cryptoeconomics/">BlockchainHub –加密经济学</a></li>
+<li><a href="https://hackernoon.com/proof-of-work-proof-of-stake-and-proof-of-burn-6823eac2776e">Hackernoon –工作证明，权益证明和烧伤证明</a></li>
+<li><a href="https://hackernoon.com/alternative-blockchain-consensus-mechanisms-40c1509af39e">Hackernoon –替代区块链共识机制</a></li>
+<li><a href="https://blockgeeks.com/guides/ethereum-casper/">Blockgeeks –什么是以太坊Casper协议？速成课程</a></li>
+<li><a href="https://lisk.io/academy/blockchain-basics/how-does-blockchain-work/delegated-proof-of-stake">Lisk Academy –什么是委托权益证明？（DPoS）</a></li>
+<li><a href="https://cointelegraph.com/news/proof-of-importance-nem-is-going-to-add-reputations-to-the-blockchain">Cointelegraph –重要证明：NEM如何为区块链增加声誉</a></li>
+<li><a href="https://medium.com/poa-network/proof-of-authority-consensus-model-with-identity-at-stake-d5bd15463256">中等– @poanetwork –授权证明：具有权益的共识模型</a></li>
+<li><a href="https://medium.com/@abhisharm/understanding-proof-of-stake-through-its-flaws-part-2-nothing-s-at-stake-8d12d826956c">中级– @abhisharm –了解其缺陷的权益证明。第2部分-“一无所获”</a></li>
+<li><a href="https://medium.com/kokster/understanding-hyperledger-sawtooth-proof-of-elapsed-time-e0c303577ec1">中– @ kynan.rilee –了解超级账本锯齿–经过时间的证明</a></li>
+<li><a href="http://tendermint.readthedocs.io/projects/tools/en/master/introduction.html">嫩薄荷文档</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag1/">tag1</a>
+
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag2/">tag2</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-tooltip="区块链之Fabric环境搭建">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E9%93%BE/" data-tooltip="区块链之Ethereum搭建私有链">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 何海涛的博客. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-tooltip="区块链之Fabric环境搭建">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E9%93%BE/" data-tooltip="区块链之Ethereum搭建私有链">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%2585%25B1%25E8%25AF%2586%25E6%259C%25BA%25E5%2588%25B6%25E8%25AF%25A6%25E8%25A7%25A3%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%2585%25B1%25E8%25AF%2586%25E6%259C%25BA%25E5%2588%25B6%25E8%25AF%25A6%25E8%25A7%25A3%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258B%25E5%2585%25B1%25E8%25AF%2586%25E6%259C%25BA%25E5%2588%25B6%25E8%25AF%25A6%25E8%25A7%25A3%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">何海涛的博客</h4>
+    
+      <div id="about-card-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        PM
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        SZ
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hehaitao.vip/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://hehaitao.vip/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hehaitao.vip\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3\/';
+          
+            this.page.identifier = '\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'adityamangal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

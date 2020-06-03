@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.66.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="何海涛的博客">
+<meta name="keywords" content="tech">
+<meta name="description" content="以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。">
+
+
+<meta property="og:description" content="以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链之Ethereum开发笔记">
+<meta name="twitter:title" content="区块链之Ethereum开发笔记">
+<meta property="og:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+<meta property="twitter:url" content="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+<meta property="og:site_name" content="何海涛的博客">
+<meta property="og:description" content="以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。">
+<meta name="twitter:description" content="以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-03T14:42:58">
+  
+  
+    <meta property="article:modified_time" content="2020-06-03T14:42:58">
+  
+  
+  
+    
+      <meta property="article:section" content="category">
+    
+      <meta property="article:section" content="subcategory">
+    
+  
+  
+    
+      <meta property="article:tag" content="tag1">
+    
+      <meta property="article:tag" content="tag2">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@adityamangal410">
+
+
+  <meta name="twitter:creator" content="@adityamangal410">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://hehaitao.vip/profile.jpg">
+  <meta property="twitter:image" content="https://hehaitao.vip/profile.jpg">
+
+
+    <title>区块链之Ethereum开发笔记</title>
+
+    <link rel="icon" href="https://hehaitao.vip/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://hehaitao.vip/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-78062737-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://hehaitao.vip/">何海涛的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://hehaitao.vip/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://hehaitao.vip/#about">
+          <img class="sidebar-profile-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">何海涛的博客</h4>
+        
+          <h5 class="sidebar-profile-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/adityamangal410" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/adityamangal410/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:adityamangal410@yahoo.co.in" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://hehaitao.vip/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      区块链之Ethereum开发笔记
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-03T14:42:58&#43;08:00">
+        
+  六月 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/category">category</a>, 
+    
+      <a class="category-link" href="https://hehaitao.vip/categories/subcategory">subcategory</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。</p>
+<h3 id="节点搭建">节点搭建</h3>
+<p>配置文件如下</p>
+<pre><code>[program:eth_node]
+command=/home/ubuntu/bin/geth --rpc --rpcapi web3,eth,net,db,personal,admin --rpcaddr 0.0.0.0 --rpcport 8545 --maxpeers 100
+autostart=true
+autorestart=true
+startsecs=5
+priority=1
+stopasgroup=true
+killasgroup=true
+user=ubuntu
+stderr_logfile=/home/ubuntu/data/eth_stderr.log
+stdout_logfile=/home/ubuntu/data/eth_stdout.log
+</code></pre><h1 id="geth-documentation">Geth Documentation</h1>
+<p>You have found the user manual for geth, the Go language implementation of Ethereum.</p>
+<ul>
+<li><a href="https://geth.ethereum.org/docs/getting-started">Getting Started Guide</a></li>
+<li><a href="https://geth.ethereum.org/docs/install-and-build/installing-geth">Installation Instructions</a></li>
+<li><a href="https://geth.ethereum.org/docs/rpc/server">JSON-RPC Server</a></li>
+<li><a href="https://geth.ethereum.org/docs/interface/javascript-console">JavaScript Console</a></li>
+</ul>
+<p>For the Go API reference and developer documentation head over to <a href="https://godoc.org/github.com/ethereum/go-ethereum">GoDoc</a>.</p>
+<h3 id="other-ethereum-documentation">Other Ethereum Documentation</h3>
+<p>For generic Ethereum-related information, check the <strong><a href="https://github.com/ethereum/wiki/wiki">Ethereum Wiki</a></strong>.</p>
+<ul>
+<li><a href="https://github.com/ethereum/wiki/wiki/White-Paper">Ethereum Whitepaper</a></li>
+<li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum Yellow Paper</a></li>
+<li><a href="https://eips.ethereum.org/">Ethereum Improvement Proposals (EIPs)</a></li>
+<li><a href="https://github.com/ethereum/devp2p/blob/master/README.md">Peer-to-peer Networking Specifications</a></li>
+</ul>
+<p>参考网站： <a href="https://geth.ethereum.org/docs/">https://geth.ethereum.org/docs/</a></p>
+<hr>
+<h2 id="用户">用户</h2>
+<ul>
+<li>
+<p>打开控制台</p>
+<pre><code>$ geth  --datadir=path/to/custom/data/folder attach
+ 
+--datadir“~/.ethereum”数据库和密钥库的数据目录
+</code></pre></li>
+<li>
+<p>创建账户,参数是密码</p>
+</li>
+</ul>
+<pre><code>  在控制台输入下面命令：
+  
+  personal.newAccount(&quot;Write here a good, randomly generated, passphrase!&quot;)
+  &quot;0x0fec688d601909d28faf6fe18cf6230d08b698b6&quot;
+
+  默认第一个创建的用户为主用户
+</code></pre><p>查看用户：</p>
+<pre><code>eth.accounts
+[&quot;0x0fec688d601909d28faf6fe18cf6230d08b698b6&quot;]
+
+账户的排序反映了他们创建的时间。 密钥文件存储在DATADIR / keystore下，可以通过复制其中包含的文件在客户端之间传输。 这些文件使用密码加密，如果它们包含任何数量的以太网，则应备份。 但是，请注意，如果您传输个别密钥文件，则提交的帐户顺序可能会发生变化，您可能无法在同一位置结束同一帐户。 因此请注意，只要您不将外部密钥文件复制到您的密钥存储区，只依赖帐户索引即可。
+</code></pre><ul>
+<li>解锁帐户</li>
+</ul>
+<pre><code>personal.unlockAccount(&quot;0x42080eed689d8a60f02e8dc8bee6d67a8262fdea&quot;)
+或者
+这里是给第一个账户解锁
+user1=eth.accounts[0]
+personal.unlockAccount(user1)
+</code></pre><h3 id="账户">账户</h3>
+<pre><code>USAGE:   
+geth account command [command options] [arguments...]
+
+COMMANDS:    
+	list    列出所有帐户的简要信息     
+	new     创建一个新账户     
+	update  更新现有账户     
+	import  将私钥导入一个新帐户
+	OPTIONS:   
+		--help, -h  show help
+</code></pre><h3 id="geth-account-list">geth account list</h3>
+<p>列出所有帐户的简要信息</p>
+<pre><code>list [command options] [arguments...]列出所有帐户的简要信息ETHEREUM OPTIONS:  --datadir &quot;/root/.ethereum&quot;  数据库和密钥库的数据目录  --keystore                   密钥库目录 (默认同datadir)
+</code></pre><p>示例：</p>
+<pre><code>&gt; geth account list --datadir &quot;/root/Documents/ethereum/data/&quot;INFO [04-09|00:56:47] Maximum peer count                       ETH=25 LES=0 total=25Account #0: {93a44e1e0aceb6a68ed39018d48a359b0beb8eb5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-28T06-14-55.548233530Z--93a44e1e0aceb6a68ed39018d48a359b0beb8eb5Account #1: {68512ebacb81a3274933de1ac02a787927ef76d5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-29T07-38-29.214491449Z--68512ebacb81a3274933de1ac02a787927ef76d5
+</code></pre><h4 id="geth-account-new">geth account new</h4>
+<pre><code>new [command options] [arguments...]    geth account new创建一个新帐户并打印地址。该帐户以加密格式保存，系统会提示您输入密码。您必须记住此密码才能在未来解锁您的帐户。对于非交互式使用，可以使用--password 选项来指定密码请注意，这种方式仅用于测试，因为将密码保存到文件或以任何其他方式公开都是一个坏主意。ETHEREUM OPTIONS:  --datadir &quot;/root/.ethereum&quot;  数据库和密钥库的数据目录  --keystore                   密钥库目录 (默认同datadir)  --lightkdf                   以减少KDF（秘钥生成函数）的强度为代价减少生成秘钥时RAM和CPU的使用量ACCOUNT OPTIONS:  --password value  用于非交互式密码输入时指定密码文件
+</code></pre><p>示例：</p>
+<pre><code>&gt; geth account new --datadir &quot;/root/Documents/ethereum/data/&quot;INFO [04-09|01:15:46] Maximum peer count                       ETH=25 LES=0 total=25Your new account is locked with a password. Please give a password. Do not forget this password.Passphrase:Repeat passphrase:Address: {0ed90cf4d6a37cbcf7c4b9461f151c6f1fe2284b}&gt; geth account list --datadir &quot;/root/Documents/ethereum/data/&quot;INFO [04-09|01:16:09] Maximum peer count                       ETH=25 LES=0 total=25Account #0: {93a44e1e0aceb6a68ed39018d48a359b0beb8eb5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-28T06-14-55.548233530Z--93a44e1e0aceb6a68ed39018d48a359b0beb8eb5Account #1: {68512ebacb81a3274933de1ac02a787927ef76d5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-29T07-38-29.214491449Z--68512ebacb81a3274933de1ac02a787927ef76d5Account #2: {0ed90cf4d6a37cbcf7c4b9461f151c6f1fe2284b} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-04-09T08-15-58.475205640Z--0ed90cf4d6a37cbcf7c4b9461f151c6f1fe2284b
+</code></pre><p>使用密码文件的方式:
+/root/Documents/ethereum/pwd 的内容是一个密码的字符串</p>
+<pre><code>&gt; geth account new --datadir &quot;/root/Documents/ethereum/data/&quot; --password &quot;/root/Documents/ethereum/pwd&quot;INFO [04-09|01:17:44] Maximum peer count                       ETH=25 LES=0 total=25Address: {f96a0654d887881cd8cdd5c4320125ae90515a0d}&gt; geth account list --datadir &quot;/root/Documents/ethereum/data/&quot;INFO [04-09|01:17:49] Maximum peer count                       ETH=25 LES=0 total=25Account #0: {93a44e1e0aceb6a68ed39018d48a359b0beb8eb5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-28T06-14-55.548233530Z--93a44e1e0aceb6a68ed39018d48a359b0beb8eb5Account #1: {68512ebacb81a3274933de1ac02a787927ef76d5} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-03-29T07-38-29.214491449Z--68512ebacb81a3274933de1ac02a787927ef76d5Account #2: {0ed90cf4d6a37cbcf7c4b9461f151c6f1fe2284b} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-04-09T08-15-58.475205640Z--0ed90cf4d6a37cbcf7c4b9461f151c6f1fe2284bAccount #3: {f96a0654d887881cd8cdd5c4320125ae90515a0d} keystore:///root/Documents/ethereum/data/keystore/UTC--2018-04-09T08-17-44.504001170Z--f96a0654d887881cd8cdd5c4320125ae90515a0d
+</code></pre><h4 id="geth-account-update">geth account update</h4>
+<pre><code>update [command options] [arguments...]    geth account update &lt;address&gt;更新现有帐户。要更新的帐户以加密格式保存在最新版本中，系统会提示您输入密码以解锁帐户，然后再输入新密码，就会把新密码更新到存储文件。使用本命令可以用于将老格式的帐户迁移至最新格式或更改帐户的密码。对于非交互式使用，可以使用--password 选项来指定新密码：         geth account update [options] &lt;address&gt;由于只能输入一个密码，只能进行格式更新，所以更改密码是唯一的交互方式。ETHEREUM OPTIONS:  --datadir &quot;/root/.ethereum&quot;  数据库和密钥库的数据目录  --keystore                   密钥库目录 (默认同datadir)  --lightkdf                   以减少KDF（秘钥生成函数）的强度为代价减少生成秘钥时RAM和CPU的使用量
+</code></pre><blockquote>
+<p>我理解的这里的格式修改，是指随着geth版本升级，对账户的构成方式（生成秘钥的方式等）发生了变化，此时需要适配新版本。把老版本用户进行更新。实际中未遇到此类情况。欢迎理解的童鞋不吝赐教。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code>&gt; geth account update f96a0654d887881cd8cdd5c4320125ae90515a0d --datadir &quot;/root/Documents/ethereum/data/&quot;INFO [04-09|01:36:07] Maximum peer count                       ETH=25 LES=0 total=25Unlocking account f96a0654d887881cd8cdd5c4320125ae90515a0d | Attempt 1/3Passphrase:INFO [04-09|01:36:11] Unlocked account                         address=0xf96a0654D887881cd8cDD5c4320125aE90515A0DPlease give a new password. Do not forget this password.Passphrase:Repeat passphrase:
+</code></pre><h4 id="geth-account-import">geth account import</h4>
+<pre><code>import [command options] [arguments...]    geth account import &lt;keyfile&gt;从&lt;keyfile&gt;导入一个未加密的私钥并创建一个新帐户。返回新创建用户的地址。这个密钥文件（keyfile）需要包含十六进制格式的未加密私钥。该帐户将以加密格式保存，系统会提示您输入密码。您必须记住此密码才能在未来解锁您的帐户。对于非交互式使用，可以使用--password 选项来指定新密码：    geth account import [options] &lt;keyfile&gt;注意：由于您可以直接将加密帐户复制到另一个以太坊实例，因此在节点之间传输帐户时不需要此导入机制。ETHEREUM OPTIONS:  --datadir &quot;/root/.ethereum&quot;  数据库和密钥库的数据目录  --keystore                   密钥库目录 (默认同datadir)  --lightkdf                   以减少KDF（秘钥生成函数）的强度为代价减少生成秘钥时RAM和CPU的使用量ACCOUNT OPTIONS:  --password value  用于非交互式密码输入时指定密码文件
+</code></pre><h3 id="挖矿">挖矿</h3>
+<ul>
+<li>
+<p>开始挖矿</p>
+<pre><code>miner.start()
+挖到一个区块会奖励5个以太币，挖矿所得的奖励会进入矿工的账户，这个账户叫做coinbase，默认情况下coinbase是本地账户中的第一个账户：
+</code></pre></li>
+<li>
+<p>查看挖矿进账用户</p>
+<pre><code>eth.coinbase
+&quot;0xf9ab190a9c56fd0d945eac9659c0c9519b13c64e&quot;
+现在的coinbase是账户0，要想使挖矿奖励进入其他账户，通过miner.setEtherbase()将其他账户设置成coinbase即可
+</code></pre></li>
+<li>
+<p>设置挖矿用户</p>
+<pre><code>miner.setEtherbase(eth.accounts[1])
+true
+eth.coinbase
+&quot;0xb89bf2a212484ef9f1bd09efcd57cf37dbb1e52f&quot;
+</code></pre></li>
+<li>
+<p>停止挖矿</p>
+<pre><code>miner.stop()
+true
+</code></pre></li>
+<li>
+<p>检查挖矿是否已经停止，eth.mining 输出为false时表示挖矿已经停止</p>
+<pre><code>eth.mining
+false
+</code></pre></li>
+</ul>
+<h3 id="交易">交易</h3>
+<ul>
+<li>
+<p>查看帐号余额</p>
+<p>eth.getBalance(eth.accounts[0])</p>
+<p>getBalance()返回值的单位是wei，wei是以太币的最小单位，1个以太币=10的18次方个wei。要查看有多少个以太币，可以用web3.fromWei()将返回值换算成以太币：</p>
+<pre><code>web3.fromWei(eth.getBalance(eth.accounts[0]),'ether')
+340
+单位转换： Ether– Wei
+web3.toWei(1)
+  
+单位转换： Wei – Ether
+  
+web3.fromWei(10000000000000000)
+</code></pre></li>
+<li>
+<p>转账
+转账前需要解锁帐号，就像输入银行卡号密码</p>
+<pre><code>eth.sendTransaction({&quot;from&quot;:&quot;0x67128734480a0741595538d9d726f33addf83978&quot;, &quot;to&quot;:&quot;0x29a9a6bcf1ce7101ab93a029e2692298fc15e076&quot;, &quot;gas&quot;:31000,&quot;gasPrice&quot;:web3.toWei(300,'gwei'),&quot;value&quot;:&quot;1&quot;})
+  
+&quot;0x54325698db1fbc85799b2f72070cddc457932abf0eef0d30d4fb2710ddafa941&quot;
+  
+eth.sendTransaction({&quot;from&quot;:&quot;0x67128734480a0741595538d9d726f33addf83978&quot;, &quot;to&quot;:&quot;0x29a9a6bcf1ce7101ab93a029e2692298fc15e076&quot;, &quot;value&quot;:&quot;10000000000000000000000&quot;})
+&quot;0x533d3c770aed09ede826c92e7460fd38d78a101752a7b3b25e4470d8594e77bb&quot;
+    
+</code></pre></li>
+<li>
+<p>查看当前区块总数：</p>
+<p>eth.blockNumber
+69</p>
+</li>
+<li>
+<p>通过区块号查看区块里打包的交易信息</p>
+<pre><code>eth.getBlock(6)
+{
+difficulty: 2,
+extraData: &quot;0xd783010803846765746887676f312e392e32856c696e75780000000000000000cff7302b0c5515614e52f1584ff3f6aceb10dfa6e2facb347bfe3c023878d3857fa48774a98c721bcc1fb2419a177d577a0926e9f51d037095ba53257f7f307701&quot;,
+gasLimit: 6246618,
+gasUsed: 21000,
+hash: &quot;0x5e2506ce385e38bbe23765a24ec25f9742e4a3a5af7cd071088081535a6a0dd2&quot;,
+logsBloom: &quot;0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&quot;,
+miner: &quot;0x0000000000000000000000000000000000000000&quot;,
+mixHash: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+nonce: &quot;0x0000000000000000&quot;,
+number: 6,
+parentHash: &quot;0x716da23fef7103042762025aabc83f7075fca516ab9dc6d436daa58b8350953b&quot;,
+receiptsRoot: &quot;0x056b23fbba480696b65fe5a59b8f2148a1299103c4f57df839233af2cf4ca2d2&quot;,
+sha3Uncles: &quot;0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347&quot;,
+size: 713,
+stateRoot: &quot;0x7c93a037c0750ddca8330d9c84912c622cd355c6978fc4267ffe2c8517a32469&quot;,
+timestamp: 1520398599,
+totalDifficulty: 13,
+transactions: [&quot;0x54325698db1fbc85799b2f72070cddc457932abf0eef0d30d4fb2710ddafa941&quot;],
+transactionsRoot: &quot;0x712b5bba767dd0ecaeebbbeefdf097647a0f219f11f16e4a8a3d768b59ae442e&quot;,
+uncles: []
+}
+</code></pre></li>
+<li>
+<p>通过交易hash查看交易</p>
+<pre><code>eth.getTransaction(&quot;0x54325698db1fbc85799b2f72070cddc457932abf0eef0d30d4fb2710ddafa941&quot;)
+{
+blockHash: &quot;0x5e2506ce385e38bbe23765a24ec25f9742e4a3a5af7cd071088081535a6a0dd2&quot;,
+blockNumber: 6,
+from: &quot;0x67128734480a0741595538d9d726f33addf83978&quot;,
+gas: 31000,
+gasPrice: 300000000000,
+hash: &quot;0x54325698db1fbc85799b2f72070cddc457932abf0eef0d30d4fb2710ddafa941&quot;,
+input: &quot;0x&quot;,
+nonce: 5,
+r: &quot;0xe14faca3d11a47ec4617927c84a04936dbaf783cc2187794e04299ce04352404&quot;,
+s: &quot;0x6da16b4e07a4fc721273d3b09da1c8b29ad4ce8022a99eb3f8317247cf7f5386&quot;,
+to: &quot;0x29a9a6bcf1ce7101ab93a029e2692298fc15e076&quot;,
+transactionIndex: 0,
+v: &quot;0xa95&quot;,
+value: 1
+}
+</code></pre></li>
+<li>
+<p>查看交易状态</p>
+<p>txpool.status
+{
+pending: 0,
+queued: 0
+}</p>
+</li>
+</ul>
+<h2 id="算法">算法</h2>
+<p>1.以太坊Geth客户端命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">geth</span> <span style="color:#a6e22e">attach</span> <span style="color:#960050;background-color:#1e0010">#</span> 
+
+<span style="color:#a6e22e">eth</span>.<span style="color:#a6e22e">blockNumber</span> <span style="color:#960050;background-color:#1e0010">#</span> 
+
+<span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">peerCount</span> <span style="color:#960050;background-color:#1e0010">#</span> 
+
+<span style="color:#a6e22e">eth</span>.<span style="color:#a6e22e">accounts</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">查看所有账户</span>
+
+<span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">account</span>
+
+
+</code></pre></div><p>2.地址私钥对产生算法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">privateKey, err :<span style="color:#f92672">=</span> crypto.GenerateKey()
+<span style="color:#66d9ef">if</span> err <span style="color:#f92672">!=</span> nil {
+    log.Fatal(err)
+}
+
+privateKeyBytes :<span style="color:#f92672">=</span> crypto.FromECDSA(privateKey)
+fmt.Println(hexutil.Encode(privateKeyBytes)[<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>]) 
+
+publicKey :<span style="color:#f92672">=</span> privateKey.Public()
+publicKeyECDSA, ok :<span style="color:#f92672">=</span> publicKey.(<span style="color:#f92672">*</span>ecdsa.PublicKey)
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span>ok {
+    log.Fatal(<span style="color:#e6db74">&#34;cannot assert type: publicKey is not of type *ecdsa.PublicKey&#34;</span>)
+}
+
+publicKeyBytes :<span style="color:#f92672">=</span> crypto.FromECDSAPub(publicKeyECDSA)
+fmt.Println(hexutil.Encode(publicKeyBytes)[<span style="color:#ae81ff">4</span><span style="color:#f92672">:</span>]) 
+
+address :<span style="color:#f92672">=</span> crypto.PubkeyToAddress(<span style="color:#f92672">*</span>publicKeyECDSA).Hex()
+fmt.Println(address) 
+
+<span style="color:#75715e">//hash := sha3.NewKeccak256()
+</span><span style="color:#75715e"></span>hash :<span style="color:#f92672">=</span> sha3.NewLegacyKeccak256()
+hash.Write(publicKeyBytes[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>])
+fmt.Println(hexutil.Encode(hash.Sum(nil)[<span style="color:#ae81ff">12</span><span style="color:#f92672">:</span>])) 
+
+</code></pre></div><h2 id="节点升级">节点升级</h2>
+<p>1.9.7版本：wget <a href="https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.9.7-a718daa6.tar.gz">https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.9.7-a718daa6.tar.gz</a></p>
+<p>1.9.9版本：wget <a href="https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.9.9-01744997.tar.gz">https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.9.9-01744997.tar.gz</a></p>
+<h2 id="附录">附录</h2>
+<ul>
+<li>Parity API官方：https://wiki.parity.io/JSONRPC-eth-module.html</li>
+<li>以太坊系列：https://www.huweihuang.com/article/ethereum/ethereum-account-management/</li>
+</ul>
+<h2 id="命令用法">命令用法</h2>
+<pre><code>geth [选项] 命令 [命令选项] [参数…]
+</code></pre><h3 id="版本">版本：</h3>
+<pre><code>1.7.3-stable
+</code></pre><h3 id="命令">命令:</h3>
+<pre><code>account    管理账户
+attach     启动交互式JavaScript环境（连接到节点）
+bug        上报bug Issues
+console    启动交互式JavaScript环境
+copydb     从文件夹创建本地链
+dump       Dump（分析）一个特定的块存储
+dumpconfig 显示配置值
+export     导出区块链到文件
+import     导入一个区块链文件
+init       启动并初始化一个新的创世纪块
+js         执行指定的JavaScript文件(多个)
+license    显示许可信息
+makecache  生成ethash验证缓存(用于测试)
+makedag    生成ethash 挖矿DAG(用于测试)
+monitor    监控和可视化节点指标
+removedb   删除区块链和状态数据库
+version    打印版本号
+wallet     管理Ethereum预售钱包
+help,h     显示一个命令或帮助一个命令列表
+</code></pre><h3 id="ethereum选项">ETHEREUM选项:</h3>
+<pre><code>--config value          TOML 配置文件
+--datadir “xxx”         数据库和keystore密钥的数据目录
+--keystore              keystore存放目录(默认在datadir内)
+--nousb                 禁用监控和管理USB硬件钱包
+--networkid value       网络标识符(整型, 1=Frontier, 2=Morden (弃用), 3=Ropsten, 4=Rinkeby) (默认: 1)
+--testnet               Ropsten网络:预先配置的POW(proof-of-work)测试网络
+--rinkeby               Rinkeby网络: 预先配置的POA(proof-of-authority)测试网络
+--syncmode &quot;fast&quot;       同步模式 (&quot;fast&quot;, &quot;full&quot;, or &quot;light&quot;)
+--ethstats value        上报ethstats service  URL (nodename:secret@host:port)
+--identity value        自定义节点名
+--lightserv value       允许LES请求时间最大百分比(0 – 90)(默认值:0) 
+--lightpeers value      最大LES client peers数量(默认值:20)
+--lightkdf              在KDF强度消费时降低key-derivation RAM&amp;CPU使用
+</code></pre><h3 id="开发者模式选项">开发者（模式）选项:</h3>
+<pre><code>--dev               使用POA共识网络，默认预分配一个开发者账户并且会自动开启挖矿。
+--dev.period value  开发者模式下挖矿周期 (0 = 仅在交易时) (默认: 0)
+</code></pre><h3 id="ethash-选项">ETHASH 选项:</h3>
+<pre><code>--ethash.cachedir                        ethash验证缓存目录(默认 = datadir目录内)
+--ethash.cachesinmem value               在内存保存的最近的ethash缓存个数  (每个缓存16MB ) (默认: 2)
+--ethash.cachesondisk value              在磁盘保存的最近的ethash缓存个数 (每个缓存16MB) (默认: 3)
+--ethash.dagdir &quot;&quot;                       存ethash DAGs目录 (默认 = 用户hom目录)
+--ethash.dagsinmem value                 在内存保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 1)
+--ethash.dagsondisk value                在磁盘保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 2)
+</code></pre><h3 id="交易池选项">交易池选项:</h3>
+<pre><code>--txpool.nolocals            为本地提交交易禁用价格豁免
+--txpool.journal value       本地交易的磁盘日志：用于节点重启 (默认: &quot;transactions.rlp&quot;)
+--txpool.rejournal value     重新生成本地交易日志的时间间隔 (默认: 1小时)
+--txpool.pricelimit value    加入交易池的最小的gas价格限制(默认: 1)
+--txpool.pricebump value     价格波动百分比（相对之前已有交易） (默认: 10)
+--txpool.accountslots value  每个帐户保证可执行的最少交易槽数量  (默认: 16)
+--txpool.globalslots value   所有帐户可执行的最大交易槽数量 (默认: 4096)
+--txpool.accountqueue value  每个帐户允许的最多非可执行交易槽数量 (默认: 64)
+--txpool.globalqueue value   所有帐户非可执行交易最大槽数量  (默认: 1024)
+--txpool.lifetime value      非可执行交易最大入队时间(默认: 3小时)
+</code></pre><h3 id="性能调优的选项">性能调优的选项:</h3>
+<pre><code>--cache value                分配给内部缓存的内存MB数量，缓存值(最低16 mb /数据库强制要求)(默认:128)
+--trie-cache-gens value      保持在内存中产生的trie node数量(默认:120)
+</code></pre><h3 id="帐户选项">帐户选项:</h3>
+<pre><code>--unlock value              需解锁账户用逗号分隔
+--password value            用于非交互式密码输入的密码文件
+</code></pre><h3 id="api和控制台选项">API和控制台选项:</h3>
+<pre><code>--rpc                       启用HTTP-RPC服务器
+--rpcaddr value             HTTP-RPC服务器接口地址(默认值:“localhost”)
+--rpcport value             HTTP-RPC服务器监听端口(默认值:8545)
+--rpcapi value              基于HTTP-RPC接口提供的API
+--ws                        启用WS-RPC服务器
+--wsaddr value              WS-RPC服务器监听接口地址(默认值:“localhost”)
+--wsport value              WS-RPC服务器监听端口(默认值:8546)
+--wsapi  value              基于WS-RPC的接口提供的API
+--wsorigins value           websockets请求允许的源
+--ipcdisable                禁用IPC-RPC服务器
+--ipcpath                   包含在datadir里的IPC socket/pipe文件名(转义过的显式路径)
+--rpccorsdomain value       允许跨域请求的域名列表(逗号分隔)(浏览器强制)
+--jspath loadScript         JavaScript加载脚本的根路径(默认值:“.”)
+--exec value                执行JavaScript语句(只能结合console/attach使用)
+--preload value             预加载到控制台的JavaScript文件列表(逗号分隔)
+</code></pre><h3 id="网络选项">网络选项:</h3>
+<pre><code>--bootnodes value    用于P2P发现引导的enode urls(逗号分隔)(对于light servers用v4+v5代替)
+--bootnodesv4 value  用于P2P v4发现引导的enode urls(逗号分隔) (light server, 全节点)
+--bootnodesv5 value  用于P2P v5发现引导的enode urls(逗号分隔) (light server, 轻节点)
+--port value         网卡监听端口(默认值:30303)
+--maxpeers value     最大的网络节点数量(如果设置为0，网络将被禁用)(默认值:25)
+--maxpendpeers value    最大尝试连接的数量(如果设置为0，则将使用默认值)(默认值:0)
+--nat value             NAT端口映射机制 (any|none|upnp|pmp|extip:&lt;IP&gt;) (默认: “any”)
+--nodiscover            禁用节点发现机制(手动添加节点)
+--v5disc                启用实验性的RLPx V5(Topic发现)机制
+--nodekey value         P2P节点密钥文件
+--nodekeyhex value      十六进制的P2P节点密钥(用于测试)
+</code></pre><h3 id="矿工选项">矿工选项:</h3>
+<pre><code>--mine                  打开挖矿
+--minerthreads value    挖矿使用的CPU线程数量(默认值:8)
+--etherbase value       挖矿奖励地址(默认=第一个创建的帐户)(默认值:“0”)
+--targetgaslimit value  目标gas限制：设置最低gas限制（低于这个不会被挖？） (默认值:“4712388”)
+--gasprice value        挖矿接受交易的最低gas价格
+--extradata value       矿工设置的额外块数据(默认=client version)
+</code></pre><h3 id="gas价格选项">GAS价格选项:</h3>
+<pre><code>--gpoblocks value      用于检查gas价格的最近块的个数  (默认: 10)
+--gpopercentile value  建议gas价参考最近交易的gas价的百分位数，(默认: 50)
+</code></pre><h3 id="虚拟机的选项">虚拟机的选项:</h3>
+<pre><code>--vmdebug        记录VM及合约调试信息
+</code></pre><h3 id="日志和调试选项">日志和调试选项:</h3>
+<pre><code>--metrics            启用metrics收集和报告
+--fakepow            禁用proof-of-work验证
+--verbosity value    日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
+--vmodule value      每个模块详细度:以 &lt;pattern&gt;=&lt;level&gt;的逗号分隔列表 (比如 eth/*=6,p2p=5)
+--backtrace value    请求特定日志记录堆栈跟踪 (比如 “block.go:271”)
+--debug                     突出显示调用位置日志(文件名及行号)
+--pprof                     启用pprof HTTP服务器
+--pprofaddr value           pprof HTTP服务器监听接口(默认值:127.0.0.1)
+--pprofport value           pprof HTTP服务器监听端口(默认值:6060)
+--memprofilerate value      按指定频率打开memory profiling    (默认:524288)
+--blockprofilerate value    按指定频率打开block profiling    (默认值:0)
+--cpuprofile value          将CPU profile写入指定文件
+--trace value               将execution trace写入指定文件
+</code></pre><h3 id="whisper实验选项">WHISPER实验选项:</h3>
+<pre><code>--shh                        启用Whisper
+--shh.maxmessagesize value   可接受的最大的消息大小 (默认值: 1048576)
+--shh.pow value              可接受的最小的POW (默认值: 0.2)
+</code></pre><h3 id="弃用选项">弃用选项：</h3>
+<pre><code>--fast     开启快速同步
+--light    启用轻客户端模式
+</code></pre><h3 id="其他选项">其他选项:</h3>
+<pre><code>–help, -h    显示帮助
+</code></pre><h3 id="版权">版权：</h3>
+<pre><code>Copyright 2013-2017 The go-ethereum Authors
+</code></pre><h1 id="问题收集">问题收集</h1>
+<p>ethereum 报错汇总, 包含一些自己遇到的和网上收集的报错。</p>
+<h2 id="问题收集-1">问题收集</h2>
+<h3 id="go-ethereum-以太坊编译时报错undefined-reference-to-libiconv">go-ethereum 以太坊编译时报错：undefined reference to `libiconv&rsquo;</h3>
+<p>参考地址：https://shaohualee.com/article/890</p>
+<pre><code>make geth
+build/env.sh go run build/ci.go install ./cmd/geth
+&gt;&gt;&gt; /usr/local/go/bin/go install -ldflags -X main.gitCommit=1db4ecdc0b9e828ff65777fb466fc7c1d04e0de9 -v ./cmd/geth
+github.com/ethereum/go-ethereum/vendor/github.com/karalabe/hid
+# github.com/ethereum/go-ethereum/vendor/github.com/karalabe/hid
+/tmp/go-build267146492/github.com/ethereum/go-ethereum/vendor/github.com/karalabe/hid/_obj/hid_enabled.cgo2.o: In function `get_usb_string':
+hid_enabled.cgo2.c:(.text+0x94d4): undefined reference to `libiconv_open'
+hid_enabled.cgo2.c:(.text+0x9523): undefined reference to `libiconv'
+hid_enabled.cgo2.c:(.text+0x954f): undefined reference to `libiconv_close'
+collect2: error: ld returned 1 exit status
+util.go:44: exit status 2
+exit status 1
+make: *** [geth] Error 1
+</code></pre><p>只要这一步神操作就可以了：</p>
+<pre><code>rm /usr/local/include/iconv.h #最好是适用mv哈。mv /usr/local/include/iconv.h /usr/local/include/iconv.h.back
+</code></pre><h3 id="以太坊的手续费计算">以太坊的手续费计算</h3>
+<p>在以太坊发出交易或者其他一些东西的时候，如果手续费计算有问题或者没有在此之前半段账户余额是不是充足，便会碰到“insufficient funds for gas * price + value”异常。今天就带大家看看源代码分析一下此异常的始末。</p>
+<p>手续费不足异常</p>
+<p>手续费不足的异常情况，意思就是发起交易所需手续费超过了地址中的余额，因为我们知道发起交易需的手续费是由gasLimit和gasPrice组成，即它们的乘积。然而交易一旦发出之后，实际消费的手续费却是由gasPrice和交易的字节数决定的。</p>
+<p>我们先看一下异常信息：</p>
+<p><code>Insufficient funds for gas * price + value</code></p>
+<p>、这条异常信息就是告诉我们：当前地址的余额不足以支付gasLimit乘以gasPrice再加上转账的value值。异常中的gas指的就是gasLimit，price就是gasPrice，value指的是发起交易转账的以太币。</p>
+<p>源代码分析</p>
+<p>异常定义代码，注释部分已经很明确的说明了异常信息发生的情况：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// ErrInsufficientFunds is returned if the total cost of executing a transaction
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// is higher than the balance of the user‘s account.
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">ErrInsufficientFunds</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span><span style="color:#960050;background-color:#1e0010">（“</span><span style="color:#a6e22e">insufficient</span> <span style="color:#a6e22e">funds</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">gas</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">price</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">value</span><span style="color:#960050;background-color:#1e0010">“）</span>
+
+<span style="color:#a6e22e">调用检验金额代码</span><span style="color:#960050;background-color:#1e0010">：</span>
+
+<span style="color:#75715e">// Transactor should have enough funds to cover the costs
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// cost == V + GP * GL
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">pool</span>.<span style="color:#a6e22e">currentState</span>.<span style="color:#a6e22e">GetBalance</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">from</span><span style="color:#960050;background-color:#1e0010">）</span>.<span style="color:#a6e22e">Cmp</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">Cost</span><span style="color:#960050;background-color:#1e0010">（））</span> <span style="color:#960050;background-color:#1e0010">＜</span> <span style="color:#ae81ff">0</span> {
+
+<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ErrInsufficientFunds</span>
+
+}
+
+<span style="color:#a6e22e">再看一下tx</span>.<span style="color:#a6e22e">Cost是如何计算获取得到的</span><span style="color:#960050;background-color:#1e0010">：</span>
+
+<span style="color:#75715e">// Cost returns amount + gasprice * gaslimit.
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">func</span> <span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">tx</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Transaction</span><span style="color:#960050;background-color:#1e0010">）</span> <span style="color:#a6e22e">Cost</span><span style="color:#960050;background-color:#1e0010">（）</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">big</span>.<span style="color:#a6e22e">Int</span> {
+
+<span style="color:#a6e22e">total</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">new</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">big</span>.<span style="color:#a6e22e">Int</span><span style="color:#960050;background-color:#1e0010">）</span>.<span style="color:#a6e22e">Mul</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">Price</span>, <span style="color:#66d9ef">new</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">big</span>.<span style="color:#a6e22e">Int</span><span style="color:#960050;background-color:#1e0010">）</span>.<span style="color:#a6e22e">SetUint64</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">GasLimit</span><span style="color:#960050;background-color:#1e0010">））</span>
+
+<span style="color:#a6e22e">total</span>.<span style="color:#a6e22e">Add</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">total</span>, <span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">Amount</span><span style="color:#960050;background-color:#1e0010">）</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">total</span>
+
+}
+</code></pre></div><p>很明显代码中也是通过amount加上gasprice和gaslimit的乘积然后和余额进行比较。</p>
+<p>其他情况</p>
+<p>还有一些其他原因引起的此异常。比如有同学说，我通过区块链浏览器查询地址上余额足够，通过上面的公式计算获得的金额也小于余额，但每次通过节点发送交易，都会抛出此异常。</p>
+<p>针对这个问题，需要做的第一步排查就是：发出交易的节点是否同步到了账户的余额，不是通过区块链浏览器查询余额，而是要直接在本地节点中查询余额。</p>
+<h3 id="account-unlock-with-http-access-is-forbidden">account unlock with HTTP access is forbidden</h3>
+<blockquote>
+<p>使用geth 客户端，当执行personal.unlockAccount()或在程序中调用personal_unlockAccount接口时，会出现：account unlock with HTTP access is forbidden异常。</p>
+</blockquote>
+<p>异常分析</p>
+<p>出于安全考虑，默认禁止了HTTP通道解锁账户，相关issue：https://github.com/ethereum/go-ethereum/pull/17037</p>
+<p>解决方法
+如果已经了解打开此功能的风险，可通启动命令中添加参数：
+<code>--allow-insecure-unlock</code></p>
+<p>举例：</p>
+<pre><code>geth --datadir data0 --rpc --rpcaddr 127.0.0.1 --rpcport 8545 --allow-insecure-unlock console
+</code></pre><p>参考：https://blog.csdn.net/Toufahaizai/article/details/101426500</p>
+<h3 id="invalid-sender-undefined">invalid sender undefined</h3>
+<p>这个错误不会导致初始化失败，但是会在以后的转账（eth.sendTransaction），或者部署智能合约的时候产生。解决方法就是在genesis.json文件中，chainId 不能设置为0。 如果你完全按照github上给的官方配置文件，就会产生这个错误</p>
+<h3 id="error-authentication-needed-password-or-unlock-undefined">Error: authentication needed: password or unlock undefined</h3>
+<p>解锁账户：personal.unlockAccount(acc0)</p>
+<h3 id="error-exceeds-block-gas-limit-undefined">Error: exceeds block gas limit undefined.</h3>
+<p>The contract code couldn’t be stored, please check your gas amount. undefined</p>
+<p>把合约中gas改为300000。直接从那个网站的Web3 deploy 复制可能是4300000，然后改成300000，就没问题了。</p>
+<h3 id="fatal-invalid-genesis-file-missing-0x-prefix-for-hex-data">Fatal: invalid genesis file: missing 0x prefix for hex data</h3>
+<p>这个错误信息意思很明白，就是你的json文件中，对于16进制数据，需要加上0x前缀</p>
+<h3 id="fatal-invalid-genesis-file-hex-string-has-odd-length">Fatal: invalid genesis file: hex string has odd length</h3>
+<p>从v1.6开始，设置的十六进制数值，不能是奇数位， 比如不能是0x0，而应该是0x00。</p>
+<h3 id="fatal-failed-to-write-genesis-block-genesis-has-no-chain-configuration">Fatal: failed to write genesis block: genesis has no chain configuration</h3>
+<p>这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.5版本，而是需要加上config部分</p>
+<p>参考文档：</p>
+<ol>
+<li><a href="https://blog.csdn.net/loy_184548/article/details/78002015">https://blog.csdn.net/loy_184548/article/details/78002015</a></li>
+<li><a href="http://blog.leanote.com/post/chaim/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A0%94%E7%A9%B6%E3%80%90%E5%AE%89%E8%A3%85%E3%80%91">http://blog.leanote.com/post/chaim/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A0%94%E7%A9%B6%E3%80%90%E5%AE%89%E8%A3%85%E3%80%91</a></li>
+<li><a href="https://github.com/ethereum/go-ethereum/issues/15983">https://github.com/ethereum/go-ethereum/issues/15983</a></li>
+</ol>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag1/">tag1</a>
+
+  <a class="tag tag--primary tag--small" href="https://hehaitao.vip/tags/tag2/">tag2</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E6%AF%94%E7%89%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6/" data-tooltip="比特币白皮书">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-tooltip="区块链之Bitcoin开发笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 何海涛的博客. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E6%AF%94%E7%89%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6/" data-tooltip="比特币白皮书">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-tooltip="区块链之Bitcoin开发笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258Bethereum%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258Bethereum%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhehaitao.vip%2F2020%2F06%2F%25E5%258C%25BA%25E5%259D%2597%25E9%2593%25BE%25E4%25B9%258Bethereum%25E5%25BC%2580%25E5%258F%2591%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://hehaitao.vip/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">何海涛的博客</h4>
+    
+      <div id="about-card-bio">梦想还是要有的万一实现了呢！ <strong>加油吧少年</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        PM
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        SZ
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hehaitao.vip/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://hehaitao.vip/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hehaitao.vip\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0\/';
+          
+            this.page.identifier = '\/2020\/06\/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'adityamangal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

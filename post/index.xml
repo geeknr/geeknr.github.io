@@ -1,26 +1,356 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 极客笔记</title>
-    <link>https://geeknr.com/post/</link>
-    <description>Recent content in Posts on 极客笔记</description>
+    <title>Posts on 何海涛的博客</title>
+    <link>https://hehaitao.vip/post/</link>
+    <description>Recent content in Posts on 何海涛的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&lt;a href=&#39;http://www.beian.gov.cn/portal/registerSystemInfo?spm=5176.13841030.7y9jhqsfz.111.3b715c69yrvLX2&#39; target=&#39;_blank&#39;&gt;粤ICP备19141391号-1&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 02 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 03 Jun 2020 14:46:36 +0800</lastBuildDate>
     
-	<atom:link href="https://geeknr.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hehaitao.vip/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello Geeknr</title>
-      <link>https://geeknr.com/post/hello/</link>
-      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      <title>区块链之Fabric架构详解</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E6%9E%B6%E6%9E%84%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Wed, 03 Jun 2020 14:46:36 +0800</pubDate>
       
-      <guid>https://geeknr.com/post/hello/</guid>
-      <description> &amp;ldquo;Hello, friend?&amp;rdquo; That&amp;rsquo;s lame. Maybe I should give you a name&amp;hellip; But that&amp;rsquo;s a slippery slope. You&amp;rsquo;re only in my head. We have to remember that&amp;hellip; Shit. It&amp;rsquo;s actually happened. I&amp;rsquo;m talking to an imaginary person.
-— Mr. Robot S01E01
- </description>
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E6%9E%B6%E6%9E%84%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;hyperledger fabric是区块链中联盟链的优秀实现，主要代码由IBM、Intel、各大银行等贡献，目前v1.1版的kafka共识方式可达到1000/s次的吞吐量。本文中我们依次讨论：区块链的共通特性、fabric核心概念、fabric的交易执行流程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>比特币白皮书</title>
+      <link>https://hehaitao.vip/2020/06/%E6%AF%94%E7%89%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6/</link>
+      <pubDate>Wed, 03 Jun 2020 14:43:57 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%AF%94%E7%89%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6/</guid>
+      <description>&lt;p&gt;摘要]：本文提出了一种完全通过点对点技术实现的电子现金系统，它使得在线支付能够直接由一方发起并支付给另外一方，中间不需要通过任何的金融机构。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之Ethereum开发笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:42:58 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;以太坊（英文Ethereum）是一个开源的有智能合约功能的公共区块链平台，通过其专用加密货币以太币（Ether，简称“ETH”）提供去中心化的以太虚拟机（Ethereum Virtual Machine）来处理点对点合约。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之Bitcoin开发笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:42:14 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;本文提出了一种完全通过点对点技术实现的电子现金系统，它使得在线支付能够直接由一方发起并支付给另外一方，中间不需要通过任何的金融机构&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>名言警句大全</title>
+      <link>https://hehaitao.vip/2020/06/%E5%90%8D%E8%A8%80%E8%AD%A6%E5%8F%A5%E5%A4%A7%E5%85%A8/</link>
+      <pubDate>Wed, 03 Jun 2020 14:40:55 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%90%8D%E8%A8%80%E8%AD%A6%E5%8F%A5%E5%A4%A7%E5%85%A8/</guid>
+      <description>&lt;p&gt;卓越的人一大优点是：在不利与艰难的遭遇里百折不饶。——贝多芬&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>以太坊白皮书</title>
+      <link>https://hehaitao.vip/2020/06/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%99%BD%E7%9A%AE%E4%B9%A6/</link>
+      <pubDate>Wed, 03 Jun 2020 14:40:03 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%99%BD%E7%9A%AE%E4%B9%A6/</guid>
+      <description>&lt;p&gt;常被提及的应用包括使用链上数字资产来代表定制货币和金融工具（彩色币），某种基础物理设备的所有权（智能资产），如域名一样的没有可替代性的资产（域名币）以及如去中心化交易所，金融衍生品，点到点赌博和链上身份和信誉系统等更高级的应用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>创业家分享 2</title>
+      <link>https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-2/</link>
+      <pubDate>Wed, 03 Jun 2020 14:39:03 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-2/</guid>
+      <description>&lt;p&gt;当时我还在上班，但我是爱技术、爱写作的人，就一口应承下来，然后开启了写书之旅。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>创业家分享 1</title>
+      <link>https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-1/</link>
+      <pubDate>Wed, 03 Jun 2020 14:38:27 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%88%9B%E4%B8%9A%E5%AE%B6%E5%88%86%E4%BA%AB-1/</guid>
+      <description>&lt;p&gt;创业家2天前90后创业者杨宝通： 五次创业经验分享，草根如何从零开始创业?　　2009 年我还是一个懵懂无知的高二学生，从在学校推销 Mp4 开始踏上了创业的旅途&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Golang之实战开发笔记</title>
+      <link>https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:35:29 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/golang%E4%B9%8B%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>区块链之技术开发指南</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Wed, 03 Jun 2020 14:34:01 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;p&gt;收集所有区块链(BlockChain)技术开发相关资料&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之USDT开发笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Busdt%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:32:50 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Busdt%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;Omni Core是Bitcoin Core的一个分支，其Omni协议功能支持作为顶层的新功能层添加。因此，与API的交互以与Bitcoin Core相同的方式（JSON-RPC）完成，只需使用额外的RPC即可使用Omni协议功能。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之Fabric环境搭建</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 03 Jun 2020 14:31:20 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bfabric%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;p&gt;深入理解Fabric1.4环境搭建的详细过程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之共识机制详解</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Wed, 03 Jun 2020 14:30:37 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;我们的大多数读者可能已经听说过共识机制及其总体目的。因此，我们想在今天的博客文章中恢复您对此主题的记忆，并讨论各种替代方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之Ethereum搭建私有链</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E9%93%BE/</link>
+      <pubDate>Wed, 03 Jun 2020 14:29:46 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bethereum%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E9%93%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>架构师之Redis开发笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bredis%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:28:41 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bredis%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang之Modules使用详解</title>
+      <link>https://hehaitao.vip/2020/06/golang%E4%B9%8Bmodules%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Wed, 03 Jun 2020 14:23:43 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/golang%E4%B9%8Bmodules%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;随着 go1.11 的发布，go 官方引入了 go module 来解决依赖管理问题，go module 被集成到原生的 go cmd 中，但是如果你的代码库在$GOPATH中，go1.11 的 module 功能是默认不会开启的，想要开启也非常简单, 通过一个环境变量即可开启go module&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>架构师之ElasticSearch笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Belasticsearch%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:17:26 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Belasticsearch%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>区块链之Bitcoin节点搭建</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 03 Jun 2020 14:16:31 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8Bbitcoin%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>架构师之Linux笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Blinux%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:15:12 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Blinux%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>架构师之Docker笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bdocker%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:14:35 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bdocker%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>架构师之微服务笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:13:21 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;我是摘要&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>优秀网站收藏</title>
+      <link>https://hehaitao.vip/2020/06/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</link>
+      <pubDate>Wed, 03 Jun 2020 14:11:32 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</guid>
+      <description>&lt;p&gt;我是摘要部分，暂时没有。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区块链之发行以太坊资产</title>
+      <link>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/</link>
+      <pubDate>Wed, 03 Jun 2020 14:08:33 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B9%8B%E5%8F%91%E8%A1%8C%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%B5%84%E4%BA%A7/</guid>
+      <description>&lt;p&gt;imToken 是一款区块链数字钱包，支持多链，如：以太坊、比特币、Cosmos 等，它帮助你非常简单、安全地管理在区块链上的账户和资产。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>架构师之Mysql笔记</title>
+      <link>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Jun 2020 14:01:06 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8Bmysql%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;据我分析,Mysql的 InnoDB存储引擎是支持事务的，事务开启后没有被主动Commit。导致该资源被长期占用，其他事务在抢占该资源时，因上一个事务的锁而导致抢占失败！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS之Systemd服务</title>
+      <link>https://hehaitao.vip/2020/06/centos%E4%B9%8Bsystemd%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Wed, 03 Jun 2020 12:04:46 +0800</pubDate>
+      
+      <guid>https://hehaitao.vip/2020/06/centos%E4%B9%8Bsystemd%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;p&gt;Systemd 就是为了解决&lt;a href=&#34;http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html&#34;&gt;Linux 的启动&lt;/a&gt;一直采用&lt;a href=&#34;https://en.wikipedia.org/wiki/Init&#34;&gt;&lt;code&gt;init&lt;/code&gt;&lt;/a&gt;进程问题而诞生的。它的设计目标是，为系统的启动和管理提供一套完整的解决方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Who&#39;s using Tranquilpeak Hugo Theme</title>
+      <link>https://hehaitao.vip/2015/06/who-is-using-tranquilpeak-hugo-theme/</link>
+      <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2015/06/who-is-using-tranquilpeak-hugo-theme/</guid>
+      <description>&lt;p&gt;Here you can find a list of the blogs that use Tranquilpeak theme, with different styles and customizations.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Elements showcase</title>
+      <link>https://hehaitao.vip/2015/05/elements-showcase/</link>
+      <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2015/05/elements-showcase/</guid>
+      <description>&lt;p&gt;Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&amp;rsquo;s simple and elegant.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cover image showcase</title>
+      <link>https://hehaitao.vip/2015/05/cover-image-showcase/</link>
+      <pubDate>Wed, 13 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2015/05/cover-image-showcase/</guid>
+      <description>&lt;p&gt;Tranquilpeak integrate a unique &amp;ldquo;cover image&amp;rdquo; feature. Open this post to see how this feature sublimate your article.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>highlighted code showcase</title>
+      <link>https://hehaitao.vip/2015/03/highlighted-code-showcase/</link>
+      <pubDate>Mon, 23 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2015/03/highlighted-code-showcase/</guid>
+      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tags plugins showcase</title>
+      <link>https://hehaitao.vip/2014/10/tags-plugins-showcase/</link>
+      <pubDate>Wed, 29 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2014/10/tags-plugins-showcase/</guid>
+      <description>&lt;p&gt;This post is used to show how tag plugins are displayed. See &lt;a href=&#34;https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md#tags&#34;&gt;docs&lt;/a&gt; for more info.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hidden social section showcase</title>
+      <link>https://hehaitao.vip/2014/08/hidden-social-section-showcase/</link>
+      <pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2014/08/hidden-social-section-showcase/</guid>
+      <description>&lt;p&gt;This post is used to show how a site looks if the social section is hidden.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hidden tag section showcase</title>
+      <link>https://hehaitao.vip/2014/08/hidden-tag-section-showcase/</link>
+      <pubDate>Sat, 16 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2014/08/hidden-tag-section-showcase/</guid>
+      <description>&lt;p&gt;This post is used to show how a site looks if the tag section is hidden.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hidden pagination showcase</title>
+      <link>https://hehaitao.vip/2014/08/hidden-pagination-showcase/</link>
+      <pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2014/08/hidden-pagination-showcase/</guid>
+      <description>&lt;p&gt;This post is used to show how a site looks if the pagination is hidden.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Video integrations showcase</title>
+      <link>https://hehaitao.vip/2014/08/video-integrations-showcase/</link>
+      <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2014/08/video-integrations-showcase/</guid>
+      <description>&lt;p&gt;Youtube and Vimeo videos are easily integrated thanks to tags plugins. Of course, you can add video other platforms like dailymotion.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>中文測試</title>
+      <link>https://hehaitao.vip/2013/10/chinese-test/</link>
+      <pubDate>Wed, 02 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2013/10/chinese-test/</guid>
+      <description>&lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Image gallery showcase</title>
+      <link>https://hehaitao.vip/2013/02/image-gallery-showcase/</link>
+      <pubDate>Mon, 18 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2013/02/image-gallery-showcase/</guid>
+      <description>&lt;p&gt;And here is the image gallery!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>日本語テスト</title>
+      <link>https://hehaitao.vip/2013/01/japanese-test/</link>
+      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2013/01/japanese-test/</guid>
+      <description>&lt;p&gt;This is a Japanese test post to show you how japanese is displayed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Welcome to Tranquilpeak 0.4.8-BETA</title>
+      <link>https://hehaitao.vip/2011/06/welcome-to-tranquilpeak-0.4.8-beta/</link>
+      <pubDate>Wed, 15 Jun 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://hehaitao.vip/2011/06/welcome-to-tranquilpeak-0.4.8-beta/</guid>
+      <description>&lt;p&gt;Tranquilpeak is a gorgeous responsive theme for Hugo blog framework. It has many features and integrated services to improve user experience.&lt;/p&gt;</description>
     </item>
     
   </channel>
